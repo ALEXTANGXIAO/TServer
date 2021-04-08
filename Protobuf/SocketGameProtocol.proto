@@ -1,0 +1,36 @@
+syntax = "proto3";
+package SocketGameProtocol;
+
+enum RequestCode
+{
+    RequestNone = 0;
+    User = 1;//用户
+}
+
+enum ActionCode
+{
+    ActionNone = 0;
+    Register = 1;//注册
+    Login = 2;//登录
+}
+
+enum ReturnCode
+{
+    ReturnNone = 0;
+    Success = 1;//成功
+    Fail = 2;//失败
+}
+
+message MainPack
+{
+    RequestCode requestcode = 1;
+    ActionCode actioncode = 2;
+    ReturnCode returncode = 3;
+    LoginPack loginPack = 4;
+}
+
+message LoginPack
+{
+    string username = 1;//用户名
+    string password = 2;//密码
+}
