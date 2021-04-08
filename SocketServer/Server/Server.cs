@@ -35,9 +35,9 @@ namespace SocketServer
             StartAccept();
         }
 
-        public bool Resigter(Client client,MainPack pack)
+        public void RemoveClient(Client client)
         {
-            return client.GetUserData.Resigter(pack);
+            clientList.Remove(client);
         }
 
         public void Login()

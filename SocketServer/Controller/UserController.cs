@@ -12,9 +12,9 @@ namespace SocketServer
             requestCode = RequestCode.User;
         }
 
-        public MainPack Resigter(Server server,Client client,MainPack pack)
+        public MainPack Register(Server server,Client client,MainPack pack)
         {
-            if (server.Resigter(client, pack))
+            if (client.Register(pack))
             {
                 pack.Returncode = ReturnCode.Success;
             }

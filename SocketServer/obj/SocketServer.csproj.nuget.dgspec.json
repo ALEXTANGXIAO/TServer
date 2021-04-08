@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\OtherProject\\SocketServer\\SocketServer.csproj": {}
+    "E:\\TServer\\SocketServer\\SocketServer.csproj": {}
   },
   "projects": {
-    "F:\\OtherProject\\SocketServer\\SocketServer.csproj": {
+    "E:\\TServer\\SocketServer\\SocketServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\OtherProject\\SocketServer\\SocketServer.csproj",
+        "projectUniqueName": "E:\\TServer\\SocketServer\\SocketServer.csproj",
         "projectName": "SocketServer",
-        "projectPath": "F:\\OtherProject\\SocketServer\\SocketServer.csproj",
-        "packagesPath": "C:\\Users\\dmlt\\.nuget\\packages\\",
-        "outputPath": "F:\\OtherProject\\SocketServer\\obj\\",
+        "projectPath": "E:\\TServer\\SocketServer\\SocketServer.csproj",
+        "packagesPath": "C:\\Users\\Tang\\.nuget\\packages\\",
+        "outputPath": "E:\\TServer\\SocketServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dmlt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tang\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
