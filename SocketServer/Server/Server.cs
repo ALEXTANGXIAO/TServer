@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using SocketGameProtocol;
 using SocketServer.DAO;
 
@@ -11,6 +12,9 @@ namespace SocketServer
     class Server
     {
         private static Socket socket;
+
+        private Thread ausThread;
+
         private List<Client> clientList = new List<Client>();
         private ControllerManager controllerManager;
 

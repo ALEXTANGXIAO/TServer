@@ -20,13 +20,18 @@ namespace SocketServer
 
         public void HandleRequest(MainPack pack,Client client)
         {
+            if (client == null)
+            {
+                Debug.LogError("Client为空");
+            }
+
             if (controllerDic.TryGetValue(pack.Requestcode, out BaseController controller))
             {
                 string methodname = pack.Actioncode.ToString();
                 MethodInfo method = controller.GetType().GetMethod(methodname);
                 if (method == null)
                 {
-                    Debug.LogError("没有对应Method");
+                    Debug.LogError(client.clientip + "没有对应Method");
                     return;
                 }
                 object[] obj = new object[]{server, client, pack};
@@ -38,7 +43,7 @@ namespace SocketServer
             }
             else
             {
-                Debug.LogError("没有对应Controller的处理");
+                Debug.LogError(client.clientip +"没有对应Controller的处理");
             }
         }
     }

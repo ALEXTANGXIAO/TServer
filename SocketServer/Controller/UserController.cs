@@ -27,7 +27,18 @@ namespace SocketServer
 
         public MainPack Login(Server server, Client client, MainPack pack)
         {
-            return null;
+            if (client.GetUserData.Login(pack, client.GetMysqlConnect))
+            {
+                pack.Returncode = ReturnCode.Success;
+                Debug.Log("登录成功！！！！");
+                //client.GetUserInFo.UserName = pack.LoginPack.Username;
+            }
+            else
+            {
+                Debug.Log("登录失败！！！！");
+                pack.Returncode = ReturnCode.Fail;
+            }
+            return pack;
         }
     }
 }

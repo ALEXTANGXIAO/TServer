@@ -40,9 +40,17 @@ namespace SocketServer.DAO
             return true;
         }
 
-        public bool Login(MainPack pack)
+        public bool Login(MainPack pack, MySqlConnection sqlConnection)
         {
-            return true;
+            string username = pack.LoginPack.Username;
+            string password = pack.LoginPack.Password;
+
+            string sql = "SELECT * FROM userlist WHERE username='" + username + "' AND password='" + password + "'";
+            MySqlCommand cmd = new MySqlCommand(sql, sqlConnection);
+            MySqlDataReader read = cmd.ExecuteReader();
+            bool result = read.HasRows;
+            read.Close();
+            return result;
         }
     }
 }

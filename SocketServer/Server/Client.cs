@@ -21,9 +21,18 @@ namespace SocketServer
         private UserData userData;
         private Server server;
 
+
+        public string clientip;
+        public string clientAddress = "";
+
         public UserData GetUserData
         {
             get { return userData; }
+        }
+
+        public MySqlConnection GetMysqlConnect
+        {
+            get { return mySqlConn; }
         }
 
         public Client(Socket socket, Server server)
@@ -36,10 +45,24 @@ namespace SocketServer
             this.socket = socket;
 
             IPEndPoint clientipe = (IPEndPoint)socket.RemoteEndPoint;
+            GetIpAddress(clientipe.Address.ToString());
             Debug.LogInfo("[" + clientipe.Address.ToString() + "] Connected");
-            
-
+            clientip = "[" + clientipe.Address.ToString() + "]";
             StartReceive();
+        }
+
+        private void GetIpAddress(string ip)
+        {
+            string jsonString = Util.Post("http://whois.pconline.com.cn/ipJson.jsp?ip="+ ip+"&json=true");
+            var jsonData = TJson.Deserialize(jsonString);
+            if (jsonData != null)
+            {
+                var dictionary = jsonData.DictionaryData;
+                object b;
+                dictionary.TryGetValue("addr", out b);
+                clientAddress = b.ToString();
+                Debug.Log(b.ToString());
+            }
         }
 
         private void ConnectMySql()
@@ -61,6 +84,11 @@ namespace SocketServer
 
         void StartReceive()
         {
+            if (socket == null || socket.Connected == false)
+            {
+                return;
+            }
+
             socket.BeginReceive(message.Buffer, message.StartIndex,message.Remsize, SocketFlags.None, ReceiveCallback, null);
         }
 
@@ -86,7 +114,7 @@ namespace SocketServer
             }
             catch (Exception e)
             {
-                Debug.LogError(e);
+                Debug.LogError(clientip + e);
             }
         }
 
