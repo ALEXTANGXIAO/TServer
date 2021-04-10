@@ -203,21 +203,5 @@ namespace SocketServer
             }
             return result;
         }
-
-//        HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-//        req.Method = "GET";
-//        req.Headers["Accept-Language"] = "zh-CN,zh;q=0.8";
-//        req.Referer = "https://www.baidu.com/";
-//        HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-//        Stream stream = resp.GetResponseStream();
-//        string result = "";
-////注意，此处使用的编码是：gb2312
-////using (StreamReader reader = new StreamReader(stream, Encoding.Default))
-//            using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding("gb2312")))
-//        {
-//            result = reader.ReadToEnd();
-//        }
-
-
     }
 }

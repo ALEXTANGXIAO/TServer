@@ -44,9 +44,9 @@ namespace SocketServer
             clientList.Remove(client);
         }
 
-        public void Login()
+        public void Debuger()
         {
-
+            
         }
 
         public void HandleRequest(MainPack pack,Client client)
