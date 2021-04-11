@@ -16,6 +16,9 @@ namespace SocketServer
             this.server = server;
             UserController userController = new UserController();
             controllerDic.Add(userController.GetRequestCode,userController);
+
+            RoomController roomController = new RoomController();
+            controllerDic.Add(roomController.GetRequestCode, roomController);
         }
 
         public void HandleRequest(MainPack pack,Client client)

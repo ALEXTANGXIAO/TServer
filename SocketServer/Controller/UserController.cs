@@ -14,7 +14,7 @@ namespace SocketServer
 
         public MainPack Register(Server server,Client client,MainPack pack)
         {
-            if (client.Register(pack))
+            if (client.GetUserData.Register(pack, client.GetMysqlConnect))
             {
                 pack.Returncode = ReturnCode.Success;
             }

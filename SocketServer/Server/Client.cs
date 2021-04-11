@@ -128,11 +128,6 @@ namespace SocketServer
             server.HandleRequest(pack,this);
         }
 
-        public bool Register(MainPack pack)
-        {
-            return GetUserData.Register(pack, mySqlConn);
-        }
-
         private void Close()
         {
             server.RemoveClient(this);
