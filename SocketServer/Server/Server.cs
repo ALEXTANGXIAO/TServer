@@ -181,5 +181,18 @@ namespace SocketServer
                 throw;
             }
         }
+
+        /// <summary>
+        /// 世界广播消息
+        /// </summary>
+        /// <param name="Myclient"></param>
+        /// <param name="pack"></param>
+        public void BroadcastWorld(MainPack pack)
+        {
+            foreach (Client client in clientList)
+            {
+                client.Send(pack);
+            }
+        }
     }
 }
