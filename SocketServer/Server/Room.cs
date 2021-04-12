@@ -2,21 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Google.Protobuf.Collections;
 
 namespace SocketServer
 {
+    public enum RoomState
+    {
+        Waiting = 0,
+        MaxPlayer = 1,
+        Started = 2
+    }
+
     class Room
     {
-        //public string roomname;//房间名字
-        //public int maxnum;//最大人数
-        //public int state;//当前状态
-
         private RoomPack roompack;
 
         public RoomPack GetRoomInfo
         {
             get
             {
+                roompack.Curnum = clientList.Count;
                 return roompack;
             }
         }
@@ -25,11 +30,122 @@ namespace SocketServer
 
         public Room(Client client,RoomPack pack)
         {
-            //this.roomname = pack.Roomname;
-            //this.maxnum = pack.Maxnum;
             roompack = pack;
             clientList.Add(client);
-            roompack.Curnum = clientList.Count;
+            client.GetRoom = this;
+            //roompack.Curnum = clientList.Count;
         }
+
+        public RepeatedField<PlayerPack> GetPlayerInfos()
+        {
+            RepeatedField<PlayerPack> packlist = new RepeatedField<PlayerPack>();
+            foreach (Client client in clientList)
+            {
+                PlayerPack pack = new PlayerPack();
+                pack.Playername = client.Username;
+                packlist.Add(pack);
+            }
+
+            return packlist;
+        }
+
+        /// <summary>
+        /// 广播消息
+        /// </summary>
+        /// <param name="Myclient"></param>
+        /// <param name="pack"></param>
+        public void Broadcast(Client Myclient,MainPack pack)
+        {
+            foreach (Client client in clientList)
+            {
+                if (Myclient.Equals(client))
+                {
+                    continue;
+                }
+                client.Send(pack);
+            }
+        }
+
+        public void Join(Client client)
+        {
+            clientList.Add(client);
+            clientList.Add(client);
+            if (clientList.Count >= roompack.Maxnum)
+            {
+                //满人了
+                roompack.State = (int)RoomState.MaxPlayer;
+            }
+            client.GetRoom = this;
+            MainPack pack = new MainPack();
+            pack.Actioncode = ActionCode.PlayerList;
+            foreach (var player in GetPlayerInfos())
+            {
+                pack.Playerpack.Add(player);
+            }
+            Broadcast(client,pack);
+        }
+
+        public void Exit(Server server, Client client)
+        {
+            MainPack pack = new MainPack();
+
+            //if (roompack.State == (int)RoomState.Started)
+            //{
+                
+            //}
+            //else
+            //{
+
+            //}
+
+            if (client == clientList[0])
+            {
+                //房主离开了,解散房间
+                client.GetRoom = null;
+                pack.Actioncode = ActionCode.Exit;
+                Broadcast(client, pack);
+                server.RemoveRoom(this);
+                return;
+            }
+            clientList.Remove(client);
+            roompack.State = (int)RoomState.Waiting;
+            client.GetRoom = null;
+            pack.Actioncode = ActionCode.PlayerList;
+            foreach (var player in GetPlayerInfos())
+            {
+                pack.Playerpack.Add(player);
+            }
+            Broadcast(client, pack);
+        }
+
+        //public void ExitGame(Client client)
+        //{
+        //    MainPack pack = new MainPack();
+        //    if (client == clientList[0])
+        //    {
+        //        //房主退出
+        //        pack.Actioncode = ActionCode.ExitGame;
+        //        pack.Str = "r";
+        //        Broadcast(client, pack);
+        //        server.RemoveRoom(this);
+        //        client.GetRoom = null;
+        //    }
+        //    else
+        //    {
+        //        //其他成员退出
+        //        clientList.Remove(client);
+        //        client.GetRoom = null;
+        //        pack.Actioncode = ActionCode.UpCharacterList;
+        //        foreach (var VARIABLE in clientList)
+        //        {
+        //            PlayerPack playerPack = new PlayerPack();
+        //            playerPack.Playername = VARIABLE.GetUserInFo.UserName;
+        //            playerPack.Hp = VARIABLE.GetUserInFo.HP;
+        //            pack.Playerpack.Add(playerPack);
+        //        }
+        //        pack.Str = client.GetUserInFo.UserName;
+        //        Broadcast(client, pack);
+        //    }
+        //}
     }
 }

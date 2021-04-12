@@ -45,21 +45,21 @@ namespace SocketServer
         static public void Log(object value)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            string Message = String.Format("{0}|{1}|", LogLevel.DEBUG, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
+            string Message = String.Format("{0} |{1}|", LogLevel.DEBUG, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
             Console.WriteLine(Message);
         }
 
         static public void LogInfo(object value)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            string Message = String.Format("{0}|{1}|", LogLevel.INFO, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
+            string Message = String.Format("{0}  |{1}|", LogLevel.INFO, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
             Console.WriteLine(Message);
         }
 
         static public void LogError(object value)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            string Message = String.Format("{0}|{1}|", LogLevel.ERROR, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
+            string Message = String.Format("{0}  |{1}|", LogLevel.ERROR, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
             Console.WriteLine(Message);
         }
 

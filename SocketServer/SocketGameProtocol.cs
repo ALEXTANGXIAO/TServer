@@ -37,11 +37,11 @@ namespace SocketGameProtocol {
             "YW1lGAEgASgJEg4KBm1heG51bRgCIAEoBRIOCgZjdXJudW0YAyABKAUSDQoF",
             "c3RhdGUYBCABKAUiIAoKUGxheWVyUGFjaxISCgpwbGF5ZXJuYW1lGAEgASgJ",
             "KjIKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAASCAoEVXNlchABEggK",
-            "BFJvb20QAip7CgpBY3Rpb25Db2RlEg4KCkFjdGlvbk5vbmUQABIMCghSZWdp",
-            "c3RlchABEgkKBUxvZ2luEAISDgoKQ3JlYXRlUm9vbRADEgwKCEZpbmRSb29t",
-            "EAQSDgoKUGxheWVyTGlzdBAFEgwKCEpvaW5Sb29tEAYSCAoERXhpdBAHKkEK",
-            "ClJldHVybkNvZGUSDgoKUmV0dXJuTm9uZRAAEgsKB1N1Y2Nlc3MQARIICgRG",
-            "YWlsEAISDAoITm9uZVJvb20QA2IGcHJvdG8z"));
+            "BFJvb20QAiqFAQoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVn",
+            "aXN0ZXIQARIJCgVMb2dpbhACEg4KCkNyZWF0ZVJvb20QAxIMCghGaW5kUm9v",
+            "bRAEEg4KClBsYXllckxpc3QQBRIMCghKb2luUm9vbRAGEggKBEV4aXQQBxII",
+            "CgRDaGF0EAkqQQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3Vj",
+            "Y2VzcxABEggKBEZhaWwQAhIMCghOb25lUm9vbRADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -97,6 +97,10 @@ namespace SocketGameProtocol {
     ///离开
     /// </summary>
     [pbr::OriginalName("Exit")] Exit = 7,
+    /// <summary>
+    ///聊天
+    /// </summary>
+    [pbr::OriginalName("Chat")] Chat = 9,
   }
 
   public enum ReturnCode {

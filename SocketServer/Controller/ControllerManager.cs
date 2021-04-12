@@ -30,7 +30,7 @@ namespace SocketServer
 
             if (controllerDic.TryGetValue(pack.Requestcode, out BaseController controller))
             {
-                string methodname = pack.Actioncode.ToString();
+                string methodname = pack.Actioncode.ToString();                 //ActionCode的string反射拿到Controller的方法
                 MethodInfo method = controller.GetType().GetMethod(methodname);
                 if (method == null)
                 {
@@ -46,7 +46,7 @@ namespace SocketServer
             }
             else
             {
-                Debug.LogError(client.clientip +"没有对应Controller的处理");
+                Debug.LogError(client.clientip +"没有对应Controller的处理" + pack.Requestcode + pack);
             }
         }
     }

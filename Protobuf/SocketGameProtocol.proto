@@ -18,6 +18,7 @@ enum ActionCode
     PlayerList = 5;//玩家列表
     JoinRoom = 6;//加入房间
     Exit = 7;//离开
+    Chat = 9;//聊天
 }
 
 enum ReturnCode

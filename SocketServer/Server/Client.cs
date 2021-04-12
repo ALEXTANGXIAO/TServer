@@ -15,6 +15,10 @@ namespace SocketServer
         private const string connstr = "database=tgame;data source=106.52.118.65;User Id=tx;password=123456;pooling=false;charset=utf8;port=3306";
         private MySqlConnection mySqlConn;
 
+        private string username;
+
+        public string Username { get; set; }
+        public Room GetRoom { get; set; }
 
         private Socket socket;
         private Message message;
@@ -130,6 +134,11 @@ namespace SocketServer
 
         private void Close()
         {
+            if (GetRoom != null)
+            {
+                //客户端强制关闭，退出
+                GetRoom.Exit(server,this);
+            }
             server.RemoveClient(this);
             socket.Close();
             mySqlConn.Close();

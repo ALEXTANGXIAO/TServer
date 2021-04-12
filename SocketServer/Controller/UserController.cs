@@ -31,6 +31,7 @@ namespace SocketServer
             {
                 pack.Returncode = ReturnCode.Success;
                 Debug.Log("登录成功！！！！");
+                client.Username = pack.LoginPack.Username;
                 //client.GetUserInFo.UserName = pack.LoginPack.Username;
             }
             else
