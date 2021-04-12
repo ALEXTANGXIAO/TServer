@@ -111,7 +111,7 @@ namespace SocketServer
         {
             foreach (var room in roomList)
             {
-                if (room.GetRoomInfo.Equals(pack.Str))
+                if (room.GetRoomInfo.Roomname.Equals(pack.Str))
                 {
                     //存在房间
                     //room State为0则是等待状态可以加入房间
@@ -126,6 +126,7 @@ namespace SocketServer
                         }
 
                         pack.Returncode = ReturnCode.Success;
+                        return pack;
                     }
                     else
                     {
@@ -172,7 +173,7 @@ namespace SocketServer
                     Debug.LogError(client.Username+"没有房间");
                     return;
                 }
-
+                pack.Returncode = ReturnCode.Success;
                 client.GetRoom.Broadcast(client, pack);
             }
             catch (Exception e)

@@ -58,17 +58,16 @@ namespace SocketServer
         {
             foreach (Client client in clientList)
             {
-                if (Myclient.Equals(client))
-                {
-                    continue;
-                }
+                //if (Myclient.Equals(client))
+                //{
+                //    continue;
+                //}
                 client.Send(pack);
             }
         }
 
         public void Join(Client client)
         {
-            clientList.Add(client);
             clientList.Add(client);
             if (clientList.Count >= roompack.Maxnum)
             {
