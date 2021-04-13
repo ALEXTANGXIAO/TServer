@@ -139,7 +139,7 @@ namespace SocketServer
         {
             if (client.GetRoom == null)
             {
-                //非正常游戏（Bug 导致）
+                //非正常游戏
                 pack.Returncode = ReturnCode.Fail;
                 return pack;
             }

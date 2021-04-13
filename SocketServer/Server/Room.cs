@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Google.Protobuf.Collections;
 
 namespace SocketServer
@@ -115,6 +116,44 @@ namespace SocketServer
                 pack.Playerpack.Add(player);
             }
             Broadcast(client, pack);
+        }
+
+        public ReturnCode StartGame(Client client)
+        {
+            if (client != clientList[0])
+            {
+                return ReturnCode.Fail; //不是房主
+            }
+            roompack.State = 2;
+            Thread starttime = new Thread(Time);
+            starttime.Start();
+            Debug.Log(roompack + "开始游戏");
+            return ReturnCode.Success;
+        }
+
+        private void Time()
+        {
+            MainPack pack = new MainPack();
+            pack.Actioncode = ActionCode.Chat;
+            pack.Str = "房主已启动游戏...";
+            Broadcast(null, pack);
+            Thread.Sleep(1000);
+            for (int i = 5; i > 0; i--)
+            {
+                pack.Str = i.ToString();
+                Broadcast(null, pack);
+                Thread.Sleep(1000);
+            }
+
+            pack.Actioncode = ActionCode.Starting;
+
+            foreach (var client in clientList)
+            {
+                PlayerPack player = new PlayerPack();
+                player.Playername = client.Username;
+                pack.Playerpack.Add(player);
+            }
+            Broadcast(null, pack);
         }
 
         //public void ExitGame(Client client)

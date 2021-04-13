@@ -36,12 +36,14 @@ namespace SocketGameProtocol {
             "GAEgASgJEhAKCHBhc3N3b3JkGAIgASgJIksKCFJvb21QYWNrEhAKCHJvb21u",
             "YW1lGAEgASgJEg4KBm1heG51bRgCIAEoBRIOCgZjdXJudW0YAyABKAUSDQoF",
             "c3RhdGUYBCABKAUiIAoKUGxheWVyUGFjaxISCgpwbGF5ZXJuYW1lGAEgASgJ",
-            "KjIKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAASCAoEVXNlchABEggK",
-            "BFJvb20QAiqFAQoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVn",
-            "aXN0ZXIQARIJCgVMb2dpbhACEg4KCkNyZWF0ZVJvb20QAxIMCghGaW5kUm9v",
-            "bRAEEg4KClBsYXllckxpc3QQBRIMCghKb2luUm9vbRAGEggKBEV4aXQQBxII",
-            "CgRDaGF0EAkqQQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3Vj",
-            "Y2VzcxABEggKBEZhaWwQAhIMCghOb25lUm9vbRADYgZwcm90bzM="));
+            "KjwKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAASCAoEVXNlchABEggK",
+            "BFJvb20QAhIICgRHYW1lEAMqswEKCkFjdGlvbkNvZGUSDgoKQWN0aW9uTm9u",
+            "ZRAAEgwKCFJlZ2lzdGVyEAESCQoFTG9naW4QAhIOCgpDcmVhdGVSb29tEAMS",
+            "DAoIRmluZFJvb20QBBIOCgpQbGF5ZXJMaXN0EAUSDAoISm9pblJvb20QBhII",
+            "CgRFeGl0EAcSCAoEQ2hhdBAIEg0KCVN0YXJ0R2FtZRAJEgwKCFN0YXJ0aW5n",
+            "EAoSDwoLVXBkYXRlU3RhdGUQCypBCgpSZXR1cm5Db2RlEg4KClJldHVybk5v",
+            "bmUQABILCgdTdWNjZXNzEAESCAoERmFpbBACEgwKCE5vbmVSb29tEANiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -65,6 +67,10 @@ namespace SocketGameProtocol {
     ///房间
     /// </summary>
     [pbr::OriginalName("Room")] Room = 2,
+    /// <summary>
+    ///游戏
+    /// </summary>
+    [pbr::OriginalName("Game")] Game = 3,
   }
 
   public enum ActionCode {
@@ -100,7 +106,19 @@ namespace SocketGameProtocol {
     /// <summary>
     ///聊天
     /// </summary>
-    [pbr::OriginalName("Chat")] Chat = 9,
+    [pbr::OriginalName("Chat")] Chat = 8,
+    /// <summary>
+    ///开始游戏
+    /// </summary>
+    [pbr::OriginalName("StartGame")] StartGame = 9,
+    /// <summary>
+    ///服务端发送来的开始游戏指令
+    /// </summary>
+    [pbr::OriginalName("Starting")] Starting = 10,
+    /// <summary>
+    ///更新玩家状态
+    /// </summary>
+    [pbr::OriginalName("UpdateState")] UpdateState = 11,
   }
 
   public enum ReturnCode {

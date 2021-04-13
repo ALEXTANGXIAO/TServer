@@ -44,7 +44,7 @@ namespace SocketServer
 
         static public void Log(object value)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
             string Message = String.Format("{0} |{1}|", LogLevel.DEBUG, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")) + value.ToString();
             Console.WriteLine(Message);
         }

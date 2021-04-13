@@ -36,5 +36,11 @@ namespace SocketServer
             server.Chat(client, pack);
             return null;
         }
+
+        public MainPack StartGame(Server server, Client client, MainPack pack)
+        {
+            pack.Returncode = client.GetRoom.StartGame(client);
+            return pack;
+        }
     }
 }
