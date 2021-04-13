@@ -28,6 +28,7 @@ namespace SocketServer
             socket.Bind(new IPEndPoint(IPAddress.Any, port));
             socket.Listen(0);
             StartAccept();
+            Debug.Log("TCP服务已开启");
         }
 
         void StartAccept()
@@ -45,11 +46,7 @@ namespace SocketServer
         public void RemoveClient(Client client)
         {
             clientList.Remove(client);
-        }
-
-        public void Debuger()
-        {
-            
+            client = null;
         }
 
         public void HandleRequest(MainPack pack,Client client)
@@ -91,10 +88,6 @@ namespace SocketServer
                 }
                 foreach (Room room in roomList)
                 {
-                    //if(room.GetRoomInfo.State!= 0)
-                    //{
-                    //    continue;
-                    //}
                     pack.Roompack.Add(room.GetRoomInfo);
                 }
                 pack.Returncode = ReturnCode.Success;

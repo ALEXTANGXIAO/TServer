@@ -15,8 +15,6 @@ namespace SocketServer
         private const string connstr = "database=tgame;data source=106.52.118.65;User Id=tx;password=123456;pooling=false;charset=utf8;port=3306";
         private MySqlConnection mySqlConn;
 
-        private string username;
-
         public string Username { get; set; }
         public Room GetRoom { get; set; }
 
@@ -109,6 +107,7 @@ namespace SocketServer
 
                 if (Length == 0)
                 {
+                    Close();
                     return;
                 }
 
@@ -119,12 +118,21 @@ namespace SocketServer
             catch (Exception e)
             {
                 Debug.LogError(clientip + e);
+                Close();
             }
         }
 
         public void Send(MainPack pack)
         {
-            socket.Send(Message.PackData(pack));
+            if (socket == null || socket.Connected == false) return;
+            try
+            {
+                socket.Send(Message.PackData(pack));
+            }
+            catch
+            {
+
+            }
         }
 
         private void HandleRequest(MainPack pack)
@@ -136,12 +144,13 @@ namespace SocketServer
         {
             if (GetRoom != null)
             {
+                Debug.Log(this.clientAddress + this.clientip + "断开连接");
                 //客户端强制关闭，退出
                 GetRoom.Exit(server,this);
             }
-            server.RemoveClient(this);
             socket.Close();
             mySqlConn.Close();
+            server.RemoveClient(this);
         }
     }
 }
