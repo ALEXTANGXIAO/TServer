@@ -61,4 +61,20 @@ message RoomPack
 message PlayerPack
 {
     string playername = 1;//玩家名称
+    string playerID = 2;//玩家ID
+    int32 hp = 3;//玩家血量
+    PosPack posPack = 4;//位置信息
+}
+
+message PosPack
+{
+    float PosX = 1;
+    float PosY = 2;
+    float PosZ = 3;
+
+    float RotaX = 4;
+    float RotaY = 5;
+    float RotaZ = 6;
+
+    float GunRotZ = 7;
 }
