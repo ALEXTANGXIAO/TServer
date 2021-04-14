@@ -60,7 +60,6 @@ E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.csprojAssemblyReference.cache
 E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.AssemblyInfoInputs.cache
 E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.AssemblyInfo.cs
 E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.csproj.CoreCompileInputs.cache

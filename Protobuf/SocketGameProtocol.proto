@@ -64,6 +64,8 @@ message PlayerPack
     string playerID = 2;//玩家ID
     int32 hp = 3;//玩家血量
     PosPack posPack = 4;//位置信息
+    int32 playerJob = 5;//玩家职业
+    string playerAppearance = 6;//玩家外观
 }
 
 message PosPack
