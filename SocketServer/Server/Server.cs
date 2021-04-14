@@ -12,7 +12,7 @@ namespace SocketServer
     class Server
     {
         private static Socket socket;
-
+        private UDPServer us;
         private Thread ausThread;
 
         private List<Client> clientList = new List<Client>(); //世界消息在ClientList发送
@@ -29,6 +29,7 @@ namespace SocketServer
             socket.Listen(0);
             StartAccept();
             Debug.Log("TCP服务已开启");
+            us = new UDPServer(port + 1, this, controllerManager);
         }
 
         void StartAccept()
@@ -39,7 +40,7 @@ namespace SocketServer
         void AcceptCallback(IAsyncResult asyncResult)
         {
             Socket client = socket.EndAccept(asyncResult);   //结束应答
-            clientList.Add(new Client(client,this));
+            clientList.Add(new Client(client,this,us));
             StartAccept();
         }
 
@@ -58,7 +59,7 @@ namespace SocketServer
         {
             try
             {
-                Room room = new Room(client, pack.Roompack[0]); //创建一个房间
+                Room room = new Room(client, pack.Roompack[0],this); //创建一个房间
                 roomList.Add(room);
                 foreach (var p in room.GetPlayerInfos())
                 {
@@ -187,6 +188,18 @@ namespace SocketServer
             {
                 client.Send(pack);
             }
+        }
+
+        public Client ClientFromUserName(string user)
+        {
+            foreach (Client c in clientList)
+            {
+                if (c.GetUserInFo.Username == user)
+                {
+                    return c;
+                }
+            }
+            return null;
         }
     }
 }

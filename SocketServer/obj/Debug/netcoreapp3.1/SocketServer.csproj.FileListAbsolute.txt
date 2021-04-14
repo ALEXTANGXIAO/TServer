@@ -70,3 +70,4 @@ E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.genruntimeconfig.ca
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
 E:\TServer\SocketServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+E:\TServer\SocketServer\obj\Debug\netcoreapp3.1\SocketServer.csprojAssemblyReference.cache

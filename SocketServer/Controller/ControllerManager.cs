@@ -19,9 +19,12 @@ namespace SocketServer
 
             RoomController roomController = new RoomController();
             controllerDic.Add(roomController.GetRequestCode, roomController);
+
+            GameController gameController = new GameController();
+            controllerDic.Add(gameController.GetRequestCode, gameController);
         }
 
-        public void HandleRequest(MainPack pack,Client client)
+        public void HandleRequest(MainPack pack,Client client,bool isUDP = false)
         {
             if (client == null)
             {
@@ -37,12 +40,22 @@ namespace SocketServer
                     Debug.LogError(client.clientip + "没有对应Method");
                     return;
                 }
-                object[] obj = new object[]{server, client, pack};
-                object ret = method.Invoke(controller, obj);
-                if (ret != null)
+                object[] obj;
+                if (isUDP)
                 {
-                    client.Send(ret as MainPack);
+                    obj = new object[] { client, pack };
+                    method.Invoke(controller, obj);
                 }
+                else
+                {
+                    obj = new object[] { server, client, pack };
+                    object ret = method.Invoke(controller, obj);
+                    if (ret != null)
+                    {
+                        client.Send(ret as MainPack);
+                    }
+                }
+
             }
             else
             {

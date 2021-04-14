@@ -23,6 +23,10 @@ enum ActionCode
     StartGame = 9;//开始游戏
     Starting = 10;//服务端发送来的开始游戏指令
     UpdateState = 11;//更新玩家状态
+    ExitGame = 12;//退出游戏
+    UpCharacterList = 13;//更新玩家角色列表
+    UpPos = 14;//更新位置
+    Fire = 15;//开火
 }
 
 enum ReturnCode
@@ -42,6 +46,7 @@ message MainPack
     string str = 5;
     repeated RoomPack roompack = 6;//房间包，repeated加上为list
     repeated PlayerPack playerpack = 7;
+    string user = 8;
 }
 
 message LoginPack
@@ -79,4 +84,8 @@ message PosPack
     float RotaZ = 6;
 
     float GunRotZ = 7;
+
+    float MoveMentX = 8;
+    float MoveMentY = 9;
+    float MoveMentZ = 10;
 }

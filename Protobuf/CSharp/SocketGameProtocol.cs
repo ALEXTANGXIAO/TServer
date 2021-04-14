@@ -25,37 +25,41 @@ namespace SocketGameProtocol {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChhTb2NrZXRHYW1lUHJvdG9jb2wucHJvdG8SElNvY2tldEdhbWVQcm90b2Nv",
-            "bCLLAgoITWFpblBhY2sSNAoLcmVxdWVzdGNvZGUYASABKA4yHy5Tb2NrZXRH",
+            "bCLZAgoITWFpblBhY2sSNAoLcmVxdWVzdGNvZGUYASABKA4yHy5Tb2NrZXRH",
             "YW1lUHJvdG9jb2wuUmVxdWVzdENvZGUSMgoKYWN0aW9uY29kZRgCIAEoDjIe",
             "LlNvY2tldEdhbWVQcm90b2NvbC5BY3Rpb25Db2RlEjIKCnJldHVybmNvZGUY",
             "AyABKA4yHi5Tb2NrZXRHYW1lUHJvdG9jb2wuUmV0dXJuQ29kZRIwCglsb2dp",
             "blBhY2sYBCABKAsyHS5Tb2NrZXRHYW1lUHJvdG9jb2wuTG9naW5QYWNrEgsK",
             "A3N0chgFIAEoCRIuCghyb29tcGFjaxgGIAMoCzIcLlNvY2tldEdhbWVQcm90",
             "b2NvbC5Sb29tUGFjaxIyCgpwbGF5ZXJwYWNrGAcgAygLMh4uU29ja2V0R2Ft",
-            "ZVByb3RvY29sLlBsYXllclBhY2siLwoJTG9naW5QYWNrEhAKCHVzZXJuYW1l",
-            "GAEgASgJEhAKCHBhc3N3b3JkGAIgASgJIksKCFJvb21QYWNrEhAKCHJvb21u",
-            "YW1lGAEgASgJEg4KBm1heG51bRgCIAEoBRIOCgZjdXJudW0YAyABKAUSDQoF",
-            "c3RhdGUYBCABKAUibAoKUGxheWVyUGFjaxISCgpwbGF5ZXJuYW1lGAEgASgJ",
-            "EhAKCHBsYXllcklEGAIgASgJEgoKAmhwGAMgASgFEiwKB3Bvc1BhY2sYBCAB",
-            "KAsyGy5Tb2NrZXRHYW1lUHJvdG9jb2wuUG9zUGFjayJxCgdQb3NQYWNrEgwK",
-            "BFBvc1gYASABKAISDAoEUG9zWRgCIAEoAhIMCgRQb3NaGAMgASgCEg0KBVJv",
-            "dGFYGAQgASgCEg0KBVJvdGFZGAUgASgCEg0KBVJvdGFaGAYgASgCEg8KB0d1",
-            "blJvdFoYByABKAIqPAoLUmVxdWVzdENvZGUSDwoLUmVxdWVzdE5vbmUQABII",
-            "CgRVc2VyEAESCAoEUm9vbRACEggKBEdhbWUQAyqzAQoKQWN0aW9uQ29kZRIO",
-            "CgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJCgVMb2dpbhACEg4KCkNy",
-            "ZWF0ZVJvb20QAxIMCghGaW5kUm9vbRAEEg4KClBsYXllckxpc3QQBRIMCghK",
-            "b2luUm9vbRAGEggKBEV4aXQQBxIICgRDaGF0EAgSDQoJU3RhcnRHYW1lEAkS",
-            "DAoIU3RhcnRpbmcQChIPCgtVcGRhdGVTdGF0ZRALKkEKClJldHVybkNvZGUS",
-            "DgoKUmV0dXJuTm9uZRAAEgsKB1N1Y2Nlc3MQARIICgRGYWlsEAISDAoITm9u",
-            "ZVJvb20QA2IGcHJvdG8z"));
+            "ZVByb3RvY29sLlBsYXllclBhY2sSDAoEdXNlchgIIAEoCSIvCglMb2dpblBh",
+            "Y2sSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiSwoIUm9v",
+            "bVBhY2sSEAoIcm9vbW5hbWUYASABKAkSDgoGbWF4bnVtGAIgASgFEg4KBmN1",
+            "cm51bRgDIAEoBRINCgVzdGF0ZRgEIAEoBSKZAQoKUGxheWVyUGFjaxISCgpw",
+            "bGF5ZXJuYW1lGAEgASgJEhAKCHBsYXllcklEGAIgASgJEgoKAmhwGAMgASgF",
+            "EiwKB3Bvc1BhY2sYBCABKAsyGy5Tb2NrZXRHYW1lUHJvdG9jb2wuUG9zUGFj",
+            "axIRCglwbGF5ZXJKb2IYBSABKAUSGAoQcGxheWVyQXBwZWFyYW5jZRgGIAEo",
+            "CSKqAQoHUG9zUGFjaxIMCgRQb3NYGAEgASgCEgwKBFBvc1kYAiABKAISDAoE",
+            "UG9zWhgDIAEoAhINCgVSb3RhWBgEIAEoAhINCgVSb3RhWRgFIAEoAhINCgVS",
+            "b3RhWhgGIAEoAhIPCgdHdW5Sb3RaGAcgASgCEhEKCU1vdmVNZW50WBgIIAEo",
+            "AhIRCglNb3ZlTWVudFkYCSABKAISEQoJTW92ZU1lbnRaGAogASgCKjwKC1Jl",
+            "cXVlc3RDb2RlEg8KC1JlcXVlc3ROb25lEAASCAoEVXNlchABEggKBFJvb20Q",
+            "AhIICgRHYW1lEAMq6wEKCkFjdGlvbkNvZGUSDgoKQWN0aW9uTm9uZRAAEgwK",
+            "CFJlZ2lzdGVyEAESCQoFTG9naW4QAhIOCgpDcmVhdGVSb29tEAMSDAoIRmlu",
+            "ZFJvb20QBBIOCgpQbGF5ZXJMaXN0EAUSDAoISm9pblJvb20QBhIICgRFeGl0",
+            "EAcSCAoEQ2hhdBAIEg0KCVN0YXJ0R2FtZRAJEgwKCFN0YXJ0aW5nEAoSDwoL",
+            "VXBkYXRlU3RhdGUQCxIMCghFeGl0R2FtZRAMEhMKD1VwQ2hhcmFjdGVyTGlz",
+            "dBANEgkKBVVwUG9zEA4SCAoERmlyZRAPKkEKClJldHVybkNvZGUSDgoKUmV0",
+            "dXJuTm9uZRAAEgsKB1N1Y2Nlc3MQARIICgRGYWlsEAISDAoITm9uZVJvb20Q",
+            "A2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.MainPack), global::SocketGameProtocol.MainPack.Parser, new[]{ "Requestcode", "Actioncode", "Returncode", "LoginPack", "Str", "Roompack", "Playerpack" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.MainPack), global::SocketGameProtocol.MainPack.Parser, new[]{ "Requestcode", "Actioncode", "Returncode", "LoginPack", "Str", "Roompack", "Playerpack", "User" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.LoginPack), global::SocketGameProtocol.LoginPack.Parser, new[]{ "Username", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.RoomPack), global::SocketGameProtocol.RoomPack.Parser, new[]{ "Roomname", "Maxnum", "Curnum", "State" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PlayerPack), global::SocketGameProtocol.PlayerPack.Parser, new[]{ "Playername", "PlayerID", "Hp", "PosPack" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PosPack), global::SocketGameProtocol.PosPack.Parser, new[]{ "PosX", "PosY", "PosZ", "RotaX", "RotaY", "RotaZ", "GunRotZ" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PlayerPack), global::SocketGameProtocol.PlayerPack.Parser, new[]{ "Playername", "PlayerID", "Hp", "PosPack", "PlayerJob", "PlayerAppearance" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SocketGameProtocol.PosPack), global::SocketGameProtocol.PosPack.Parser, new[]{ "PosX", "PosY", "PosZ", "RotaX", "RotaY", "RotaZ", "GunRotZ", "MoveMentX", "MoveMentY", "MoveMentZ" }, null, null, null, null)
           }));
     }
     #endregion
@@ -124,6 +128,22 @@ namespace SocketGameProtocol {
     ///更新玩家状态
     /// </summary>
     [pbr::OriginalName("UpdateState")] UpdateState = 11,
+    /// <summary>
+    ///退出游戏
+    /// </summary>
+    [pbr::OriginalName("ExitGame")] ExitGame = 12,
+    /// <summary>
+    ///更新玩家角色列表
+    /// </summary>
+    [pbr::OriginalName("UpCharacterList")] UpCharacterList = 13,
+    /// <summary>
+    ///更新位置
+    /// </summary>
+    [pbr::OriginalName("UpPos")] UpPos = 14,
+    /// <summary>
+    ///开火
+    /// </summary>
+    [pbr::OriginalName("Fire")] Fire = 15,
   }
 
   public enum ReturnCode {
@@ -177,6 +197,7 @@ namespace SocketGameProtocol {
       str_ = other.str_;
       roompack_ = other.roompack_.Clone();
       playerpack_ = other.playerpack_.Clone();
+      user_ = other.user_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -263,6 +284,17 @@ namespace SocketGameProtocol {
       get { return playerpack_; }
     }
 
+    /// <summary>Field number for the "user" field.</summary>
+    public const int UserFieldNumber = 8;
+    private string user_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string User {
+      get { return user_; }
+      set {
+        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MainPack);
@@ -283,6 +315,7 @@ namespace SocketGameProtocol {
       if (Str != other.Str) return false;
       if(!roompack_.Equals(other.roompack_)) return false;
       if(!playerpack_.Equals(other.playerpack_)) return false;
+      if (User != other.User) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -296,6 +329,7 @@ namespace SocketGameProtocol {
       if (Str.Length != 0) hash ^= Str.GetHashCode();
       hash ^= roompack_.GetHashCode();
       hash ^= playerpack_.GetHashCode();
+      if (User.Length != 0) hash ^= User.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -331,6 +365,10 @@ namespace SocketGameProtocol {
       }
       roompack_.WriteTo(output, _repeated_roompack_codec);
       playerpack_.WriteTo(output, _repeated_playerpack_codec);
+      if (User.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(User);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -356,6 +394,9 @@ namespace SocketGameProtocol {
       }
       size += roompack_.CalculateSize(_repeated_roompack_codec);
       size += playerpack_.CalculateSize(_repeated_playerpack_codec);
+      if (User.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -387,6 +428,9 @@ namespace SocketGameProtocol {
       }
       roompack_.Add(other.roompack_);
       playerpack_.Add(other.playerpack_);
+      if (other.User.Length != 0) {
+        User = other.User;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -427,6 +471,10 @@ namespace SocketGameProtocol {
           }
           case 58: {
             playerpack_.AddEntriesFrom(input, _repeated_playerpack_codec);
+            break;
+          }
+          case 66: {
+            User = input.ReadString();
             break;
           }
         }
@@ -852,6 +900,8 @@ namespace SocketGameProtocol {
       playerID_ = other.playerID_;
       hp_ = other.hp_;
       posPack_ = other.posPack_ != null ? other.posPack_.Clone() : null;
+      playerJob_ = other.playerJob_;
+      playerAppearance_ = other.playerAppearance_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -916,6 +966,34 @@ namespace SocketGameProtocol {
       }
     }
 
+    /// <summary>Field number for the "playerJob" field.</summary>
+    public const int PlayerJobFieldNumber = 5;
+    private int playerJob_;
+    /// <summary>
+    ///玩家职业
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PlayerJob {
+      get { return playerJob_; }
+      set {
+        playerJob_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "playerAppearance" field.</summary>
+    public const int PlayerAppearanceFieldNumber = 6;
+    private string playerAppearance_ = "";
+    /// <summary>
+    ///玩家外观
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PlayerAppearance {
+      get { return playerAppearance_; }
+      set {
+        playerAppearance_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PlayerPack);
@@ -933,6 +1011,8 @@ namespace SocketGameProtocol {
       if (PlayerID != other.PlayerID) return false;
       if (Hp != other.Hp) return false;
       if (!object.Equals(PosPack, other.PosPack)) return false;
+      if (PlayerJob != other.PlayerJob) return false;
+      if (PlayerAppearance != other.PlayerAppearance) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -943,6 +1023,8 @@ namespace SocketGameProtocol {
       if (PlayerID.Length != 0) hash ^= PlayerID.GetHashCode();
       if (Hp != 0) hash ^= Hp.GetHashCode();
       if (posPack_ != null) hash ^= PosPack.GetHashCode();
+      if (PlayerJob != 0) hash ^= PlayerJob.GetHashCode();
+      if (PlayerAppearance.Length != 0) hash ^= PlayerAppearance.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -972,6 +1054,14 @@ namespace SocketGameProtocol {
         output.WriteRawTag(34);
         output.WriteMessage(PosPack);
       }
+      if (PlayerJob != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(PlayerJob);
+      }
+      if (PlayerAppearance.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(PlayerAppearance);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -991,6 +1081,12 @@ namespace SocketGameProtocol {
       }
       if (posPack_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(PosPack);
+      }
+      if (PlayerJob != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerJob);
+      }
+      if (PlayerAppearance.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerAppearance);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1017,6 +1113,12 @@ namespace SocketGameProtocol {
           PosPack = new global::SocketGameProtocol.PosPack();
         }
         PosPack.MergeFrom(other.PosPack);
+      }
+      if (other.PlayerJob != 0) {
+        PlayerJob = other.PlayerJob;
+      }
+      if (other.PlayerAppearance.Length != 0) {
+        PlayerAppearance = other.PlayerAppearance;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1046,6 +1148,14 @@ namespace SocketGameProtocol {
               PosPack = new global::SocketGameProtocol.PosPack();
             }
             input.ReadMessage(PosPack);
+            break;
+          }
+          case 40: {
+            PlayerJob = input.ReadInt32();
+            break;
+          }
+          case 50: {
+            PlayerAppearance = input.ReadString();
             break;
           }
         }
@@ -1086,6 +1196,9 @@ namespace SocketGameProtocol {
       rotaY_ = other.rotaY_;
       rotaZ_ = other.rotaZ_;
       gunRotZ_ = other.gunRotZ_;
+      moveMentX_ = other.moveMentX_;
+      moveMentY_ = other.moveMentY_;
+      moveMentZ_ = other.moveMentZ_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1171,6 +1284,39 @@ namespace SocketGameProtocol {
       }
     }
 
+    /// <summary>Field number for the "MoveMentX" field.</summary>
+    public const int MoveMentXFieldNumber = 8;
+    private float moveMentX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float MoveMentX {
+      get { return moveMentX_; }
+      set {
+        moveMentX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "MoveMentY" field.</summary>
+    public const int MoveMentYFieldNumber = 9;
+    private float moveMentY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float MoveMentY {
+      get { return moveMentY_; }
+      set {
+        moveMentY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "MoveMentZ" field.</summary>
+    public const int MoveMentZFieldNumber = 10;
+    private float moveMentZ_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float MoveMentZ {
+      get { return moveMentZ_; }
+      set {
+        moveMentZ_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as PosPack);
@@ -1191,6 +1337,9 @@ namespace SocketGameProtocol {
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(RotaY, other.RotaY)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(RotaZ, other.RotaZ)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(GunRotZ, other.GunRotZ)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MoveMentX, other.MoveMentX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MoveMentY, other.MoveMentY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MoveMentZ, other.MoveMentZ)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1204,6 +1353,9 @@ namespace SocketGameProtocol {
       if (RotaY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(RotaY);
       if (RotaZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(RotaZ);
       if (GunRotZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(GunRotZ);
+      if (MoveMentX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MoveMentX);
+      if (MoveMentY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MoveMentY);
+      if (MoveMentZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MoveMentZ);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1245,6 +1397,18 @@ namespace SocketGameProtocol {
         output.WriteRawTag(61);
         output.WriteFloat(GunRotZ);
       }
+      if (MoveMentX != 0F) {
+        output.WriteRawTag(69);
+        output.WriteFloat(MoveMentX);
+      }
+      if (MoveMentY != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(MoveMentY);
+      }
+      if (MoveMentZ != 0F) {
+        output.WriteRawTag(85);
+        output.WriteFloat(MoveMentZ);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1272,6 +1436,15 @@ namespace SocketGameProtocol {
         size += 1 + 4;
       }
       if (GunRotZ != 0F) {
+        size += 1 + 4;
+      }
+      if (MoveMentX != 0F) {
+        size += 1 + 4;
+      }
+      if (MoveMentY != 0F) {
+        size += 1 + 4;
+      }
+      if (MoveMentZ != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -1305,6 +1478,15 @@ namespace SocketGameProtocol {
       }
       if (other.GunRotZ != 0F) {
         GunRotZ = other.GunRotZ;
+      }
+      if (other.MoveMentX != 0F) {
+        MoveMentX = other.MoveMentX;
+      }
+      if (other.MoveMentY != 0F) {
+        MoveMentY = other.MoveMentY;
+      }
+      if (other.MoveMentZ != 0F) {
+        MoveMentZ = other.MoveMentZ;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1343,6 +1525,18 @@ namespace SocketGameProtocol {
           }
           case 61: {
             GunRotZ = input.ReadFloat();
+            break;
+          }
+          case 69: {
+            MoveMentX = input.ReadFloat();
+            break;
+          }
+          case 77: {
+            MoveMentY = input.ReadFloat();
+            break;
+          }
+          case 85: {
+            MoveMentZ = input.ReadFloat();
             break;
           }
         }

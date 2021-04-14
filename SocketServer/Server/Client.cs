@@ -15,17 +15,57 @@ namespace SocketServer
         private const string connstr = "database=tgame;data source=106.52.118.65;User Id=tx;password=123456;pooling=false;charset=utf8;port=3306";
         private MySqlConnection mySqlConn;
 
-        public string Username { get; set; }
-        public Room GetRoom { get; set; }
-
+        private Socket udpClient;
+        private EndPoint remoteEp;
+        public UDPServer us;
         private Socket socket;
         private Message message;
         private UserData userData;
         private Server server;
+        public string Username { get; set; }
+        public Room GetRoom { get; set; }
+
+        public EndPoint IEP
+        {
+            get
+            {
+                return remoteEp;
+            }
+            set
+            {
+                remoteEp = value;
+            }
+        }
 
 
         public string clientip;
         public string clientAddress = "";
+
+        public UserInFo GetUserInFo
+        {
+            get;
+            set;
+        }
+
+        public class UserInFo
+        {
+            public string Username
+            {
+                get; set;
+            }
+
+            public int HP
+            {
+                set;
+                get;
+            }
+
+            public PosPack Pos
+            {
+                get;
+                set;
+            }
+        }
 
         public UserData GetUserData
         {
@@ -37,12 +77,14 @@ namespace SocketServer
             get { return mySqlConn; }
         }
 
-        public Client(Socket socket, Server server)
+        public Client(Socket socket, Server server,UDPServer us)
         {
             userData = new UserData();
             message = new Message();
             //mySqlConn = new MySqlConnection(connstr);
             ConnectMySql();
+            GetUserInFo = new UserInFo();
+            this.us = us;
             this.server = server;
             this.socket = socket;
 
@@ -151,6 +193,17 @@ namespace SocketServer
             socket.Close();
             mySqlConn.Close();
             server.RemoveClient(this);
+        }
+
+        public void SendTo(MainPack pack)
+        {
+            if (IEP == null) return;
+            us.SendTo(pack, IEP);
+        }
+
+        public void UpPos(MainPack pack)
+        {
+            GetUserInFo.Pos = pack.Playerpack[0].PosPack;
         }
     }
 }

@@ -50,11 +50,8 @@ namespace SocketServer
             while (true)
             {
                 int len = udpServer.ReceiveFrom(buffer, ref remoteEP);
-                //Console.WriteLine(remoteEP.ToString());
                 MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 0, len);
                 Handlerequest(pack, remoteEP);
-                //Console.WriteLine(remoteEP.ToString());
-                //Thread.Sleep(100);
             }
         }
 
@@ -62,23 +59,19 @@ namespace SocketServer
         public void Handlerequest(MainPack pack, EndPoint iPEndPoint)
         {
 
-            //Client client = server.ClientFromUserName(pack.User);
-            //if (client.IEP == null)
-            //{
-            //    client.IEP = iPEndPoint;
-            //    //if(server.SetIEP(iPEndPoint, pack.User) == false)
-            //    //{
-            //    //    return;
-            //    //}
-            //}
-            ////Console.WriteLine(client.IEP.ToString());
-            //controllerManager.HandleRequest(pack, client, true);
+            Client client = server.ClientFromUserName(pack.User);
+            if (client.IEP == null)
+            {
+                client.IEP = iPEndPoint;
+            }
+            //Debug.Log(client.IEP.ToString());
+            controllerManager.HandleRequest(pack, client, true);
         }
 
         public void SendTo(MainPack pack, EndPoint point)
         {
-            //byte[] buff = Message.PackDataUDP(pack);
-            //udpServer.SendTo(buff, buff.Length, SocketFlags.None, point);
+            byte[] buff = Message.PackDataUDP(pack);
+            udpServer.SendTo(buff, buff.Length, SocketFlags.None, point);
         }
     }
 }

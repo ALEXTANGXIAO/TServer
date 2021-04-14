@@ -39,19 +39,19 @@ namespace SocketServer
         public void ReadBuffer(int length,Action<MainPack> HandleRequest = null)
         {
             startindex += length;
-            
-            if (startindex <= bufferHead)
-            {
-                Debug.LogError("Buffer包没有完整发过来");
-                return;
-            }
-
-            int count = BitConverter.ToInt32(buffer,0);
-
-            int bufferAllCount = count + bufferHead;    //整条消息的长度
 
             while (true)
             {
+
+                if (startindex <= bufferHead)
+                {
+                    return;
+                }
+
+                int count = BitConverter.ToInt32(buffer, 0);
+
+                int bufferAllCount = count + bufferHead;    //整条消息的长度
+
                 if (startindex >= (count + bufferHead))
                 {
                     MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, bufferHead,count);
@@ -77,6 +77,11 @@ namespace SocketServer
             byte[] data = pack.ToByteArray();//包体
             byte[] head = BitConverter.GetBytes(data.Length);//包头
             return head.Concat(data).ToArray();
+        }
+
+        public static Byte[] PackDataUDP(MainPack pack)
+        {
+            return pack.ToByteArray();
         }
     }
 }
