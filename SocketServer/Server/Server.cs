@@ -28,8 +28,18 @@ namespace SocketServer
             socket.Bind(new IPEndPoint(IPAddress.Any, port));
             socket.Listen(0);
             StartAccept();
-            Debug.Log("TCP服务已开启");
+            Debug.LogInfo("TCP服务已启动...  Port:" + port);
             us = new UDPServer(port + 1, this, controllerManager);
+        }
+
+        ~Server()
+        {
+            if (ausThread != null)
+            {
+                ausThread.Abort();
+                ausThread = null;
+            }
+
         }
 
         void StartAccept()
@@ -48,6 +58,7 @@ namespace SocketServer
         {
             clientList.Remove(client);
             client = null;
+            Memory.ClearMemory();
         }
 
         public void HandleRequest(MainPack pack,Client client)
@@ -109,7 +120,7 @@ namespace SocketServer
                 {
                     //存在房间
                     //room State为0则是等待状态可以加入房间
-                    if (room.GetRoomInfo.State == 0)
+                    if (room.GetRoomInfo.State == (int)RoomState.Waiting)
                     {
                         //可以加入房间
                         room.Join(client);
@@ -154,6 +165,7 @@ namespace SocketServer
         {
             roomList.Remove(room);
             room = null;
+            Memory.ClearMemory();
         }
 
         public void Chat(Client client, MainPack pack)

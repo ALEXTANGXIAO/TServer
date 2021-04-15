@@ -85,7 +85,10 @@ message PosPack
 
     float GunRotZ = 7;
 
-    float MoveMentX = 8;
-    float MoveMentY = 9;
-    float MoveMentZ = 10;
+    int32 Animation = 8; 
+    int32 Dirt = 9;
+
+    // float MoveMentX = 8;
+    // float MoveMentY = 9;
+    // float MoveMentZ = 10;
 }

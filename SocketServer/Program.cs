@@ -22,7 +22,6 @@ namespace SocketServer
             Util.ResigterEncode();
             Debug.LogApp();
             Debug.Log("===========START SOCKET SERVER============");
-            Debug.Log("===========    Port:"+port +"     ============");
             TJson.RegistImp(new JsonImp());
         }
     }

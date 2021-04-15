@@ -18,6 +18,10 @@ namespace SocketServer
     {
         private RoomPack roompack;
 
+        private Server server;
+
+        private List<Client> clientList = new List<Client>();   //房间内所有的客户端
+
         public RoomPack GetRoomInfo
         {
             get
@@ -26,10 +30,6 @@ namespace SocketServer
                 return roompack;
             }
         }
-
-        private List<Client> clientList = new List<Client>();   //房间内所有的客户端
-
-        private Server server;
 
         public Room(Client client,RoomPack pack,Server server)
         {
@@ -66,6 +66,19 @@ namespace SocketServer
                     continue;
                 }
                 client.Send(pack);
+            }
+        }
+
+
+        public void BroadcastTo(Client client, MainPack pack)
+        {
+            foreach (Client c in clientList)
+            {
+                if (c.Equals(client))
+                {
+                    continue;
+                }
+                c.SendTo(pack);
             }
         }
 
@@ -185,18 +198,6 @@ namespace SocketServer
                 }
                 pack.Str = client.GetUserInFo.Username;
                 Broadcast(client, pack);
-            }
-        }
-
-        public void BroadcastTo(Client client, MainPack pack)
-        {
-            foreach (Client c in clientList)
-            {
-                if (c.Equals(client))
-                {
-                    continue;
-                }
-                c.SendTo(pack);
             }
         }
     }

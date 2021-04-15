@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using MySql.Data.MySqlClient;
 using SocketGameProtocol;
 using SocketServer.DAO;
@@ -77,11 +78,12 @@ namespace SocketServer
             get { return mySqlConn; }
         }
 
+
+        private Timer m_HeartBitTimer;
         public Client(Socket socket, Server server,UDPServer us)
         {
             userData = new UserData();
             message = new Message();
-            //mySqlConn = new MySqlConnection(connstr);
             ConnectMySql();
             GetUserInFo = new UserInFo();
             this.us = us;
@@ -90,9 +92,11 @@ namespace SocketServer
 
             IPEndPoint clientipe = (IPEndPoint)socket.RemoteEndPoint;
             GetIpAddress(clientipe.Address.ToString());
-            Debug.LogInfo("[" + clientipe.Address.ToString() + "] Connected");
+            Debug.LogInfo(clientAddress +" [" + clientipe.Address.ToString() + "] Connected");
             clientip = "[" + clientipe.Address.ToString() + "]";
             StartReceive();
+
+            m_HeartBitTimer = new Timer(HeartBit, 0, 0, 15000);
         }
 
         private void GetIpAddress(string ip)
@@ -105,7 +109,7 @@ namespace SocketServer
                 object b;
                 dictionary.TryGetValue("addr", out b);
                 clientAddress = b.ToString();
-                Debug.Log(b.ToString());
+                //Debug.Log(b.ToString());
             }
         }
 
@@ -147,10 +151,16 @@ namespace SocketServer
 
                 int Length = socket.EndReceive(asyncResult);
 
-                if (Length == 0)
+                if (Length <= 0)
                 {
                     Close();
                     return;
+                }
+
+                if (Length == 1)
+                {
+                    //心跳包 
+                    CheckReceiveBuffer();
                 }
 
                 message.ReadBuffer(Length, HandleRequest);
@@ -193,6 +203,9 @@ namespace SocketServer
             socket.Close();
             mySqlConn.Close();
             server.RemoveClient(this);
+
+            m_HeartBitTimer.Dispose();
+            Debug.LogInfo(clientip + "--------------  心跳断开  --------------");
         }
 
         public void SendTo(MainPack pack)
@@ -204,6 +217,47 @@ namespace SocketServer
         public void UpPos(MainPack pack)
         {
             GetUserInFo.Pos = pack.Playerpack[0].PosPack;
+        }
+
+
+        private bool m_IsCheckHeart = false;
+        private double m_TimeStamp = 0;
+        private const double DIS_CONNECT_TIME = 30;
+        private byte[] heartBytes = new byte[1]{6};
+        /// <summary>
+        /// 心跳包
+        /// </summary>
+        /// <param name="state"></param>
+        private void HeartBit(object state)
+        {
+            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            if (m_TimeStamp == 0)
+            {
+                m_TimeStamp = ts.TotalSeconds;
+            }
+
+            if (ts.TotalSeconds - m_TimeStamp > DIS_CONNECT_TIME)
+            {
+                if (!m_IsCheckHeart)
+                {
+                    m_IsCheckHeart = true;
+                    m_TimeStamp = ts.TotalSeconds;
+                    socket.Send(heartBytes);
+                    Debug.LogInfo(clientip + "-------------- 发送心跳包 --------------");
+                }
+                else
+                {
+                    Close();
+                }
+            }
+        }
+
+
+        private void CheckReceiveBuffer()
+        {
+            m_IsCheckHeart = false;
+            m_TimeStamp = 0;
+            Debug.LogInfo(clientip + "-------------- 接收心跳包 --------------");
         }
     }
 }

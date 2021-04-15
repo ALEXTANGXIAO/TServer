@@ -33,7 +33,7 @@ namespace SocketServer
             udpServer.Bind(bindEP);
             receiveThread = new Thread(ReceiveMsg);
             receiveThread.Start();
-            Console.WriteLine("UDP服务已启动...");
+            Debug.LogInfo("UDP服务已启动...  Port:" + port);
         }
 
         ~UDPServer()
@@ -47,11 +47,18 @@ namespace SocketServer
 
         public void ReceiveMsg()
         {
-            while (true)
+            try
             {
-                int len = udpServer.ReceiveFrom(buffer, ref remoteEP);
-                MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 0, len);
-                Handlerequest(pack, remoteEP);
+                while (true)
+                {
+                    int len = udpServer.ReceiveFrom(buffer, ref remoteEP);
+                    MainPack pack = (MainPack)MainPack.Descriptor.Parser.ParseFrom(buffer, 0, len);
+                    Handlerequest(pack, remoteEP);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
             }
         }
 
@@ -60,6 +67,10 @@ namespace SocketServer
         {
 
             Client client = server.ClientFromUserName(pack.User);
+            if (client == null)
+            {
+                return;
+            }
             if (client.IEP == null)
             {
                 client.IEP = iPEndPoint;
