@@ -35,4 +35,3 @@ E:\TServer\SocketServer\obj\Release\netcoreapp3.1\SocketServer.csproj.CopyComple
 E:\TServer\SocketServer\obj\Release\netcoreapp3.1\SocketServer.dll
 E:\TServer\SocketServer\obj\Release\netcoreapp3.1\SocketServer.pdb
 E:\TServer\SocketServer\obj\Release\netcoreapp3.1\SocketServer.genruntimeconfig.cache
-E:\TServer\SocketServer\obj\Release\netcoreapp3.1\SocketServer.csprojAssemblyReference.cache

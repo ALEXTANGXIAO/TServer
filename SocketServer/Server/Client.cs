@@ -96,7 +96,7 @@ namespace SocketServer
             clientip = "[" + clientipe.Address.ToString() + "]";
             StartReceive();
 
-            m_HeartBitTimer = new Timer(HeartBit, 0, 0, 15000);
+            //m_HeartBitTimer = new Timer(HeartBit, 0, 0, 15000);
         }
 
         private void GetIpAddress(string ip)
@@ -157,11 +157,13 @@ namespace SocketServer
                     return;
                 }
 
-                if (Length == 1)
-                {
-                    //心跳包 
-                    CheckReceiveBuffer();
-                }
+                //if (Length == 1)
+                //{
+                //    //心跳包 
+                //    CheckReceiveBuffer();
+                //    StartReceive();
+                //    return;
+                //}
 
                 message.ReadBuffer(Length, HandleRequest);
 
@@ -204,7 +206,11 @@ namespace SocketServer
             mySqlConn.Close();
             server.RemoveClient(this);
 
-            m_HeartBitTimer.Dispose();
+            if(m_HeartBitTimer != null)
+            {
+                m_HeartBitTimer.Dispose();
+                m_HeartBitTimer = null;
+            }
             Debug.LogInfo(clientip + "--------------  心跳断开  --------------");
         }
 
