@@ -264,6 +264,7 @@ namespace SocketServer
                 }
                 else
                 {
+                    Debug.LogError(clientip + "-------------- 停止心跳包 --------------");
                     Close();
                 }
             }
