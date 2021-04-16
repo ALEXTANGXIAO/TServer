@@ -42,15 +42,16 @@ namespace SocketGameProtocol {
             "CSKSAQoHUG9zUGFjaxIMCgRQb3NYGAEgASgCEgwKBFBvc1kYAiABKAISDAoE",
             "UG9zWhgDIAEoAhINCgVSb3RhWBgEIAEoAhINCgVSb3RhWRgFIAEoAhINCgVS",
             "b3RhWhgGIAEoAhIPCgdHdW5Sb3RaGAcgASgCEhEKCUFuaW1hdGlvbhgIIAEo",
-            "BRIMCgREaXJ0GAkgASgFKjwKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25l",
-            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMq6wEKCkFjdGlvbkNv",
-            "ZGUSDgoKQWN0aW9uTm9uZRAAEgwKCFJlZ2lzdGVyEAESCQoFTG9naW4QAhIO",
-            "CgpDcmVhdGVSb29tEAMSDAoIRmluZFJvb20QBBIOCgpQbGF5ZXJMaXN0EAUS",
-            "DAoISm9pblJvb20QBhIICgRFeGl0EAcSCAoEQ2hhdBAIEg0KCVN0YXJ0R2Ft",
-            "ZRAJEgwKCFN0YXJ0aW5nEAoSDwoLVXBkYXRlU3RhdGUQCxIMCghFeGl0R2Ft",
-            "ZRAMEhMKD1VwQ2hhcmFjdGVyTGlzdBANEgkKBVVwUG9zEA4SCAoERmlyZRAP",
-            "KkEKClJldHVybkNvZGUSDgoKUmV0dXJuTm9uZRAAEgsKB1N1Y2Nlc3MQARII",
-            "CgRGYWlsEAISDAoITm9uZVJvb20QA2IGcHJvdG8z"));
+            "BRIMCgREaXJ0GAkgASgFKkcKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25l",
+            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCQoFSGVhcnQQBCqM",
+            "AgoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJ",
+            "CgVMb2dpbhACEg4KCkNyZWF0ZVJvb20QAxIMCghGaW5kUm9vbRAEEg4KClBs",
+            "YXllckxpc3QQBRIMCghKb2luUm9vbRAGEggKBEV4aXQQBxIICgRDaGF0EAgS",
+            "DQoJU3RhcnRHYW1lEAkSDAoIU3RhcnRpbmcQChIPCgtVcGRhdGVTdGF0ZRAL",
+            "EgwKCEV4aXRHYW1lEAwSEwoPVXBDaGFyYWN0ZXJMaXN0EA0SCQoFVXBQb3MQ",
+            "DhIICgRGaXJlEA8SDQoJSGVhcnRCZWF0EBASEAoMQWRkQ2hhcmFjdGVyEBEq",
+            "QQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxABEggK",
+            "BEZhaWwQAhIMCghOb25lUm9vbRADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -79,6 +80,10 @@ namespace SocketGameProtocol {
     ///游戏
     /// </summary>
     [pbr::OriginalName("Game")] Game = 3,
+    /// <summary>
+    ///心跳
+    /// </summary>
+    [pbr::OriginalName("Heart")] Heart = 4,
   }
 
   public enum ActionCode {
@@ -132,7 +137,7 @@ namespace SocketGameProtocol {
     /// </summary>
     [pbr::OriginalName("ExitGame")] ExitGame = 12,
     /// <summary>
-    ///更新玩家角色列表
+    ///更新玩家角色列表（移除玩家）
     /// </summary>
     [pbr::OriginalName("UpCharacterList")] UpCharacterList = 13,
     /// <summary>
@@ -143,6 +148,14 @@ namespace SocketGameProtocol {
     ///开火
     /// </summary>
     [pbr::OriginalName("Fire")] Fire = 15,
+    /// <summary>
+    ///心跳
+    /// </summary>
+    [pbr::OriginalName("HeartBeat")] HeartBeat = 16,
+    /// <summary>
+    ///新增玩家
+    /// </summary>
+    [pbr::OriginalName("AddCharacter")] AddCharacter = 17,
   }
 
   public enum ReturnCode {

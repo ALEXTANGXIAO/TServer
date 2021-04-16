@@ -7,6 +7,7 @@ enum RequestCode
     User = 1;//用户
     Room = 2;//房间
     Game = 3;//游戏
+    Heart = 4;//心跳
 }
 
 enum ActionCode
@@ -24,9 +25,11 @@ enum ActionCode
     Starting = 10;//服务端发送来的开始游戏指令
     UpdateState = 11;//更新玩家状态
     ExitGame = 12;//退出游戏
-    UpCharacterList = 13;//更新玩家角色列表
+    UpCharacterList = 13;//更新玩家角色列表（移除玩家）
     UpPos = 14;//更新位置
     Fire = 15;//开火
+    HeartBeat = 16;//心跳
+    AddCharacter = 17;//新增玩家
 }
 
 enum ReturnCode

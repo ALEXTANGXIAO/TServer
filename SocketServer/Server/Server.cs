@@ -163,7 +163,10 @@ namespace SocketServer
 
         public void RemoveRoom(Room room)
         {
-            roomList.Remove(room);
+            if (roomList.Contains(room))
+            {
+                roomList.Remove(room);
+            }
             room = null;
             Memory.ClearMemory();
         }
@@ -173,7 +176,7 @@ namespace SocketServer
             try
             {
                 pack.Str = client.Username + ":" + pack.Str;
-                Debug.Log(pack);
+                //Debug.Log(pack);
                 if (client.GetRoom == null)
                 {
                     Debug.LogError(client.Username+"没有房间");

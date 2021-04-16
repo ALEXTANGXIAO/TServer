@@ -96,7 +96,15 @@ namespace SocketServer
             clientip = "[" + clientipe.Address.ToString() + "]";
             StartReceive();
 
-            //m_HeartBitTimer = new Timer(HeartBit, 0, 0, 15000);
+            InitHeartBeat();
+        }
+
+        private void InitHeartBeat()
+        {
+            m_HeartBitTimer = new Timer(HeartBeat, 0, 0, 15000);
+            heartBeatPack.Requestcode = RequestCode.Heart;
+            heartBeatPack.Actioncode = ActionCode.HeartBeat;
+            heartBeatPack.Returncode = ReturnCode.Success;
         }
 
         private void GetIpAddress(string ip)
@@ -160,6 +168,7 @@ namespace SocketServer
                 //if (Length == 1)
                 //{
                 //    //心跳包 
+                //    message.ReadBuffer(Length);
                 //    CheckReceiveBuffer();
                 //    StartReceive();
                 //    return;
@@ -228,15 +237,16 @@ namespace SocketServer
 
         private bool m_IsCheckHeart = false;
         private double m_TimeStamp = 0;
-        private const double DIS_CONNECT_TIME = 30;
+        private const double DIS_CONNECT_TIME = 15;
         private byte[] heartBytes = new byte[1]{6};
+        private static readonly DateTime standardTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        private static MainPack heartBeatPack = new MainPack();
         /// <summary>
         /// 心跳包
         /// </summary>
-        /// <param name="state"></param>
-        private void HeartBit(object state)
+        private void HeartBeat(object state)
         {
-            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan ts = DateTime.Now - standardTime;
             if (m_TimeStamp == 0)
             {
                 m_TimeStamp = ts.TotalSeconds;
@@ -248,7 +258,8 @@ namespace SocketServer
                 {
                     m_IsCheckHeart = true;
                     m_TimeStamp = ts.TotalSeconds;
-                    socket.Send(heartBytes);
+                    //socket.Send(heartBytes);
+                    Send(heartBeatPack);
                     Debug.LogInfo(clientip + "-------------- 发送心跳包 --------------");
                 }
                 else
@@ -264,6 +275,21 @@ namespace SocketServer
             m_IsCheckHeart = false;
             m_TimeStamp = 0;
             Debug.LogInfo(clientip + "-------------- 接收心跳包 --------------");
+        }
+
+        public void CheckReceiveBuffer(MainPack pack)
+        {
+            if (pack == null)
+            {
+                return;   
+            }
+
+            if (pack.Actioncode == ActionCode.HeartBeat)
+            {
+                m_IsCheckHeart = false;
+                m_TimeStamp = 0;
+                Debug.LogInfo(clientip + "-------------- 接收心跳包 --------------");
+            }
         }
     }
 }

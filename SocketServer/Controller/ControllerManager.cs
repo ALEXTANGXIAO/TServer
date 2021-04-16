@@ -22,6 +22,9 @@ namespace SocketServer
 
             GameController gameController = new GameController();
             controllerDic.Add(gameController.GetRequestCode, gameController);
+
+            HeartBeatController heartBeatController = new HeartBeatController();
+            controllerDic.Add(heartBeatController.GetRequestCode, heartBeatController);
         }
 
         public void HandleRequest(MainPack pack,Client client,bool isUDP = false)

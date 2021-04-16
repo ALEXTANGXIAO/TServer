@@ -10,11 +10,11 @@
         "projectUniqueName": "E:\\TServer\\SocketServer\\SocketServer.csproj",
         "projectName": "SocketServer",
         "projectPath": "E:\\TServer\\SocketServer\\SocketServer.csproj",
-        "packagesPath": "C:\\Users\\Tang\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\dmlt\\.nuget\\packages\\",
         "outputPath": "E:\\TServer\\SocketServer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Tang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dmlt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
