@@ -207,7 +207,6 @@ namespace SocketServer
         {
             if (GetRoom != null)
             {
-                Debug.Log(this.clientAddress + this.clientip + "断开连接");
                 //客户端强制关闭，退出
                 GetRoom.Exit(server,this);
             }
@@ -221,6 +220,7 @@ namespace SocketServer
                 m_HeartBitTimer = null;
             }
             Debug.LogInfo(clientip + "--------------  心跳断开  --------------");
+            Debug.Log(this.clientAddress + this.clientip + "断开连接");
         }
 
         public void SendTo(MainPack pack)
@@ -238,7 +238,6 @@ namespace SocketServer
         private bool m_IsCheckHeart = false;
         private double m_TimeStamp = 0;
         private const double DIS_CONNECT_TIME = 15;
-        private byte[] heartBytes = new byte[1]{6};
         private static readonly DateTime standardTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
         private static MainPack heartBeatPack = new MainPack();
         /// <summary>
