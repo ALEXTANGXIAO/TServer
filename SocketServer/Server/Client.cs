@@ -223,6 +223,10 @@ namespace SocketServer
             Debug.Log(this.clientAddress + this.clientip + "断开连接");
         }
 
+        /// <summary>
+        /// UDP发送
+        /// </summary>
+        /// <param name="pack"></param>
         public void SendTo(MainPack pack)
         {
             if (IEP == null) return;
