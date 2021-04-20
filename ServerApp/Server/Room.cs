@@ -22,6 +22,14 @@ namespace ServerApp
 
         private List<Client> clientList = new List<Client>();   //房间内所有的客户端
 
+        public List<Client> ClientList
+        {
+            get
+            {
+                return clientList;
+            }
+        }
+
         public RoomPack GetRoomInfo
         {
             get

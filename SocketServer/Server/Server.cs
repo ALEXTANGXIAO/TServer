@@ -118,6 +118,11 @@ namespace SocketServer
             {
                 if (room.GetRoomInfo.Roomname.Equals(pack.Str))
                 {
+                    if (room.ClientList.Contains(client))
+                    {
+                        pack.Returncode = ReturnCode.Fail;
+                        return pack;
+                    }
                     //存在房间
                     //room State为0则是等待状态可以加入房间
                     if (room.GetRoomInfo.State == (int)RoomState.Waiting)

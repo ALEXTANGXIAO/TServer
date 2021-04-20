@@ -117,6 +117,12 @@ namespace ServerApp
             {
                 if (room.GetRoomInfo.Roomname.Equals(pack.Str))
                 {
+                    if (room.ClientList.Contains(client))
+                    {
+                        pack.Returncode = ReturnCode.Fail;
+                        return pack;
+                    }
+
                     //可以加入房间
                     room.Join(client);
                     pack.Roompack.Add(room.GetRoomInfo);

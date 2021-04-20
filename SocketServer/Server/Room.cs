@@ -22,6 +22,14 @@ namespace SocketServer
 
         private List<Client> clientList = new List<Client>();   //房间内所有的客户端
 
+        public List<Client> ClientList
+        {
+            get
+            {
+                return clientList;
+            }
+        }
+
         public RoomPack GetRoomInfo
         {
             get
@@ -84,6 +92,11 @@ namespace SocketServer
 
         public void Join(Client client)
         {
+            if (clientList.Contains(client))
+            {
+                Debug.LogError("已经在房间了");
+                return;
+            }
             clientList.Add(client);
             if (clientList.Count >= roompack.Maxnum)
             {
