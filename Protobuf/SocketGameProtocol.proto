@@ -30,6 +30,7 @@ enum ActionCode
     Fire = 15;//开火
     HeartBeat = 16;//心跳
     AddCharacter = 17;//新增玩家
+    RemoveCharacter = 18;//移除玩家
 }
 
 enum ReturnCode

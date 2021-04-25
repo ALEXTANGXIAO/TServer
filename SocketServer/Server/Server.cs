@@ -180,8 +180,8 @@ namespace SocketServer
         {
             try
             {
-                pack.Str = client.Username + ":" + pack.Str;
-                //Debug.Log(pack);
+                pack.Str = pack.Str;
+                pack.User = client.Username;
                 if (client.GetRoom == null)
                 {
                     Debug.LogError(client.Username+"没有房间");

@@ -13,6 +13,10 @@ namespace ServerApp
 
         public MainPack ExitGame(Server server, Client client, MainPack pack)
         {
+            if (client == null)
+            {
+                return null;
+            }
             client.GetRoom.ExitGame(client);
             return null;
         }
@@ -26,6 +30,16 @@ namespace ServerApp
 
         public MainPack UpPos(Client client, MainPack pack)
         {
+            if (client == null)
+            {
+                return null;
+            }
+
+            if (client.GetRoom == null)
+            {
+                return null;
+            }
+
             client.GetRoom.BroadcastTo(client, pack);
             client.UpPos(pack);//更新位置信息
             return null;

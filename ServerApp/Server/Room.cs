@@ -39,6 +39,12 @@ namespace ServerApp
             }
         }
 
+        public Room(RoomPack pack, Server server)
+        {
+            roompack = pack;
+            this.server = server;
+        }
+
         public Room(Client client,RoomPack pack,Server server)
         {
             roompack = pack;
@@ -60,8 +66,20 @@ namespace ServerApp
             return packlist;
         }
 
+        public void BroadcastJustTo(Client Myclient, MainPack pack)
+        {
+            foreach (Client client in clientList)
+            {
+                if (client.Equals(Myclient))
+                {
+                    client.Send(pack);
+                    return;
+                }
+            }
+        }
+
         /// <summary>
-        /// 广播消息
+        /// 广播消息除了Myclient
         /// </summary>
         /// <param name="Myclient"></param>
         /// <param name="pack"></param>
@@ -99,13 +117,15 @@ namespace ServerApp
                 roompack.State = (int)RoomState.MaxPlayer;
             }
             client.GetRoom = this;
-            MainPack pack = new MainPack();
-            pack.Actioncode = ActionCode.PlayerList;
-            foreach (var player in GetPlayerInfos())
-            {
-                pack.Playerpack.Add(player);
-            }
-            Broadcast(client,pack);
+            //MainPack pack = new MainPack();
+            //pack.Actioncode = ActionCode.PlayerList;
+            //foreach (var player in GetPlayerInfos())
+            //{
+            //    pack.Playerpack.Add(player);
+            //}
+            //Broadcast(client,pack);
+
+            Starting(client);
         }
 
         public void Exit(Server server, Client client)
@@ -143,6 +163,24 @@ namespace ServerApp
             return ReturnCode.Success;
         }
 
+        private void Starting(Client Myclient)
+        {
+            MainPack pack = new MainPack();
+            pack.Actioncode = ActionCode.Starting;
+
+            foreach (var client in clientList)
+            {
+                PlayerPack player = new PlayerPack();
+                client.GetUserInFo.HP = 100;
+                player.Playername = client.GetUserInFo.Username;
+                player.Hp = client.GetUserInFo.HP;
+                pack.Playerpack.Add(player);
+            }
+            Broadcast(null, pack);
+
+            //BroadcastJustTo(Myclient, pack);
+        }
+
         private void Time()
         {
             MainPack pack = new MainPack();
@@ -176,7 +214,7 @@ namespace ServerApp
             //其他成员退出
             clientList.Remove(client);
             client.GetRoom = null;
-            pack.Actioncode = ActionCode.UpCharacterList;
+            pack.Actioncode = ActionCode.RemoveCharacter;
             foreach (var VARIABLE in clientList)
             {
                 PlayerPack playerPack = new PlayerPack();

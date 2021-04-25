@@ -43,15 +43,16 @@ namespace SocketGameProtocol {
             "UG9zWhgDIAEoAhINCgVSb3RhWBgEIAEoAhINCgVSb3RhWRgFIAEoAhINCgVS",
             "b3RhWhgGIAEoAhIPCgdHdW5Sb3RaGAcgASgCEhEKCUFuaW1hdGlvbhgIIAEo",
             "BRIMCgREaXJ0GAkgASgFKkcKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25l",
-            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCQoFSGVhcnQQBCqM",
+            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCQoFSGVhcnQQBCqh",
             "AgoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJ",
             "CgVMb2dpbhACEg4KCkNyZWF0ZVJvb20QAxIMCghGaW5kUm9vbRAEEg4KClBs",
             "YXllckxpc3QQBRIMCghKb2luUm9vbRAGEggKBEV4aXQQBxIICgRDaGF0EAgS",
             "DQoJU3RhcnRHYW1lEAkSDAoIU3RhcnRpbmcQChIPCgtVcGRhdGVTdGF0ZRAL",
             "EgwKCEV4aXRHYW1lEAwSEwoPVXBDaGFyYWN0ZXJMaXN0EA0SCQoFVXBQb3MQ",
-            "DhIICgRGaXJlEA8SDQoJSGVhcnRCZWF0EBASEAoMQWRkQ2hhcmFjdGVyEBEq",
-            "QQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxABEggK",
-            "BEZhaWwQAhIMCghOb25lUm9vbRADYgZwcm90bzM="));
+            "DhIICgRGaXJlEA8SDQoJSGVhcnRCZWF0EBASEAoMQWRkQ2hhcmFjdGVyEBES",
+            "EwoPUmVtb3ZlQ2hhcmFjdGVyEBIqQQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5O",
+            "b25lEAASCwoHU3VjY2VzcxABEggKBEZhaWwQAhIMCghOb25lUm9vbRADYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -156,6 +157,10 @@ namespace SocketGameProtocol {
     ///新增玩家
     /// </summary>
     [pbr::OriginalName("AddCharacter")] AddCharacter = 17,
+    /// <summary>
+    ///移除玩家
+    /// </summary>
+    [pbr::OriginalName("RemoveCharacter")] RemoveCharacter = 18,
   }
 
   public enum ReturnCode {

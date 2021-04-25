@@ -29,6 +29,7 @@ namespace ServerApp
             StartAccept();
             Debug.LogInfo("TCP服务已启动...  Port:" + port);
             us = new UDPServer(port + 1, this, controllerManager);
+            CreateRoom();
         }
 
         ~Server()
@@ -63,6 +64,24 @@ namespace ServerApp
         public void HandleRequest(MainPack pack, Client client)
         {
             controllerManager.HandleRequest(pack, client);
+        }
+
+        /// <summary>
+        /// 初始化服务器就创建room
+        /// </summary>
+        public void CreateRoom()
+        {
+            for (int i = 1; i <= 1; i++)
+            {
+                MainPack pack = new MainPack();
+                pack.Requestcode = RequestCode.Room;
+                RoomPack roomPack = new RoomPack();
+                roomPack.Roomname = i.ToString();
+                roomPack.Maxnum = 999;
+                Room room = new Room(roomPack, this);
+                roomList.Add(room);
+                Debug.LogInfo("创建线...  roomPack.RoomName:" + i);
+            }
         }
 
         public MainPack CreateRoom(Client client, MainPack pack)
@@ -123,7 +142,6 @@ namespace ServerApp
                         return pack;
                     }
 
-                    //可以加入房间
                     room.Join(client);
                     pack.Roompack.Add(room.GetRoomInfo);
                     foreach (var p in room.GetPlayerInfos())
@@ -169,7 +187,8 @@ namespace ServerApp
         {
             try
             {
-                pack.Str = client.Username + ":" + pack.Str;
+                pack.Str = pack.Str;
+                pack.User = client.Username;
                 //Debug.Log(pack);
                 if (client.GetRoom == null)
                 {

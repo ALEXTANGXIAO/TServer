@@ -43,15 +43,16 @@ namespace SocketGameProtocol {
             "UG9zWhgDIAEoAhINCgVSb3RhWBgEIAEoAhINCgVSb3RhWRgFIAEoAhINCgVS",
             "b3RhWhgGIAEoAhIPCgdHdW5Sb3RaGAcgASgCEhEKCUFuaW1hdGlvbhgIIAEo",
             "BRIMCgREaXJ0GAkgASgFKkcKC1JlcXVlc3RDb2RlEg8KC1JlcXVlc3ROb25l",
-            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCQoFSGVhcnQQBCr6",
-            "AQoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJ",
+            "EAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCQoFSGVhcnQQBCqh",
+            "AgoKQWN0aW9uQ29kZRIOCgpBY3Rpb25Ob25lEAASDAoIUmVnaXN0ZXIQARIJ",
             "CgVMb2dpbhACEg4KCkNyZWF0ZVJvb20QAxIMCghGaW5kUm9vbRAEEg4KClBs",
             "YXllckxpc3QQBRIMCghKb2luUm9vbRAGEggKBEV4aXQQBxIICgRDaGF0EAgS",
             "DQoJU3RhcnRHYW1lEAkSDAoIU3RhcnRpbmcQChIPCgtVcGRhdGVTdGF0ZRAL",
             "EgwKCEV4aXRHYW1lEAwSEwoPVXBDaGFyYWN0ZXJMaXN0EA0SCQoFVXBQb3MQ",
-            "DhIICgRGaXJlEA8SDQoJSGVhcnRCZWF0EBAqQQoKUmV0dXJuQ29kZRIOCgpS",
-            "ZXR1cm5Ob25lEAASCwoHU3VjY2VzcxABEggKBEZhaWwQAhIMCghOb25lUm9v",
-            "bRADYgZwcm90bzM="));
+            "DhIICgRGaXJlEA8SDQoJSGVhcnRCZWF0EBASEAoMQWRkQ2hhcmFjdGVyEBES",
+            "EwoPUmVtb3ZlQ2hhcmFjdGVyEBIqQQoKUmV0dXJuQ29kZRIOCgpSZXR1cm5O",
+            "b25lEAASCwoHU3VjY2VzcxABEggKBEZhaWwQAhIMCghOb25lUm9vbRADYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SocketGameProtocol.RequestCode), typeof(global::SocketGameProtocol.ActionCode), typeof(global::SocketGameProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -137,7 +138,7 @@ namespace SocketGameProtocol {
     /// </summary>
     [pbr::OriginalName("ExitGame")] ExitGame = 12,
     /// <summary>
-    ///更新玩家角色列表
+    ///更新玩家角色列表（移除玩家）
     /// </summary>
     [pbr::OriginalName("UpCharacterList")] UpCharacterList = 13,
     /// <summary>
@@ -152,6 +153,14 @@ namespace SocketGameProtocol {
     ///心跳
     /// </summary>
     [pbr::OriginalName("HeartBeat")] HeartBeat = 16,
+    /// <summary>
+    ///新增玩家
+    /// </summary>
+    [pbr::OriginalName("AddCharacter")] AddCharacter = 17,
+    /// <summary>
+    ///移除玩家
+    /// </summary>
+    [pbr::OriginalName("RemoveCharacter")] RemoveCharacter = 18,
   }
 
   public enum ReturnCode {
