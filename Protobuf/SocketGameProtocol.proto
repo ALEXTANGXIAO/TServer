@@ -92,7 +92,7 @@ message PosPack
     int32 Animation = 8; 
     int32 Dirt = 9;
 
-    // float MoveMentX = 8;
-    // float MoveMentY = 9;
-    // float MoveMentZ = 10;
+    float MoveX = 10;
+    float MoveY = 11;
+    float MoveZ = 12;
 }
