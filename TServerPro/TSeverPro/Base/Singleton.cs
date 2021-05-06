@@ -1,4 +1,5 @@
-﻿using SocketServer;
+﻿using ServerApp;
+using SocketServer;
 
 public class Singleton<T> where T : new()
 {

@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading;
 using MySql.Data.MySqlClient;
 using SocketGameProtocol;
-using SocketServer.DAO;
 
-namespace SocketServer
+namespace ServerApp
 {
     class Client
     {
@@ -263,11 +262,11 @@ namespace SocketServer
                     m_TimeStamp = ts.TotalSeconds;
                     //socket.Send(heartBytes);
                     Send(heartBeatPack);
-                    Debug.LogInfo(clientip + "-------------- 发送心跳包 --------------");
+                    //Debug.LogInfo(clientip + "-------------- 发送心跳包 --------------");
                 }
                 else
                 {
-                    Debug.LogError(clientip + "-------------- 停止心跳包 --------------");
+                    //Debug.LogError(clientip + "-------------- 停止心跳包 --------------");
                     Close();
                 }
             }

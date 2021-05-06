@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using SocketGameProtocol;
 
-namespace SocketServer
+namespace ServerApp
 {
     class UDPServer
     {

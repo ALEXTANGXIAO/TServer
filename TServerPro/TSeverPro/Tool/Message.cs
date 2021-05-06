@@ -5,7 +5,7 @@ using System.Text;
 using SocketGameProtocol;
 using Google.Protobuf;
 
-namespace SocketServer
+namespace ServerApp
 {
     class Message
     {

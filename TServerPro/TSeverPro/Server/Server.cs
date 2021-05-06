@@ -5,9 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using SocketGameProtocol;
-using SocketServer.DAO;
 
-namespace SocketServer
+namespace ServerApp
 {
     class Server
     {
@@ -30,6 +29,7 @@ namespace SocketServer
             StartAccept();
             Debug.LogInfo("TCP服务已启动...  Port:" + port);
             us = new UDPServer(port + 1, this, controllerManager);
+            CreateRoom();
         }
 
         ~Server()
@@ -50,7 +50,7 @@ namespace SocketServer
         void AcceptCallback(IAsyncResult asyncResult)
         {
             Socket client = socket.EndAccept(asyncResult);   //结束应答
-            clientList.Add(new Client(client,this,us));
+            clientList.Add(new Client(client, this, us));
             StartAccept();
         }
 
@@ -61,16 +61,34 @@ namespace SocketServer
             Memory.ClearMemory();
         }
 
-        public void HandleRequest(MainPack pack,Client client)
+        public void HandleRequest(MainPack pack, Client client)
         {
-            controllerManager.HandleRequest(pack,client);
+            controllerManager.HandleRequest(pack, client);
         }
 
-        public MainPack CreateRoom(Client client,MainPack pack)
+        /// <summary>
+        /// 初始化服务器就创建room
+        /// </summary>
+        public void CreateRoom()
+        {
+            for (int i = 1; i <= 1; i++)
+            {
+                MainPack pack = new MainPack();
+                pack.Requestcode = RequestCode.Room;
+                RoomPack roomPack = new RoomPack();
+                roomPack.Roomname = i.ToString();
+                roomPack.Maxnum = 999;
+                Room room = new Room(roomPack, this);
+                roomList.Add(room);
+                Debug.LogInfo("创建线...  roomPack.RoomName:" + i);
+            }
+        }
+
+        public MainPack CreateRoom(Client client, MainPack pack)
         {
             try
             {
-                Room room = new Room(client, pack.Roompack[0],this); //创建一个房间
+                Room room = new Room(client, pack.Roompack[0], this); //创建一个房间
                 roomList.Add(room);
                 foreach (var p in room.GetPlayerInfos())
                 {
@@ -93,7 +111,7 @@ namespace SocketServer
             pack.Actioncode = ActionCode.FindRoom;
             try
             {
-                if(roomList.Count == 0)
+                if (roomList.Count == 0)
                 {
                     pack.Returncode = ReturnCode.NoneRoom;
                     return pack;
@@ -112,7 +130,7 @@ namespace SocketServer
             return pack;
         }
 
-        public MainPack JoinRoom(Client client,MainPack pack)
+        public MainPack JoinRoom(Client client, MainPack pack)
         {
             foreach (var room in roomList)
             {
@@ -123,27 +141,16 @@ namespace SocketServer
                         pack.Returncode = ReturnCode.Fail;
                         return pack;
                     }
-                    //存在房间
-                    //room State为0则是等待状态可以加入房间
-                    if (room.GetRoomInfo.State == (int)RoomState.Waiting)
-                    {
-                        //可以加入房间
-                        room.Join(client);
-                        pack.Roompack.Add(room.GetRoomInfo);
-                        foreach (var p in room.GetPlayerInfos())
-                        {
-                            pack.Playerpack.Add(p);
-                        }
 
-                        pack.Returncode = ReturnCode.Success;
-                        return pack;
-                    }
-                    else
+                    room.Join(client);
+                    pack.Roompack.Add(room.GetRoomInfo);
+                    foreach (var p in room.GetPlayerInfos())
                     {
-                        //房间不可加入
-                        pack.Returncode = ReturnCode.Fail;
-                        return pack;
+                        pack.Playerpack.Add(p);
                     }
+
+                    pack.Returncode = ReturnCode.Success;
+                    return pack;
                 }
             }
             //没有此房间
@@ -161,7 +168,7 @@ namespace SocketServer
                 return pack;
             }
 
-            client.GetRoom.Exit(this,client);
+            client.GetRoom.Exit(this, client);
             pack.Returncode = ReturnCode.Success;
             return pack;
         }
@@ -182,9 +189,10 @@ namespace SocketServer
             {
                 pack.Str = pack.Str;
                 pack.User = client.Username;
+                //Debug.Log(pack);
                 if (client.GetRoom == null)
                 {
-                    Debug.LogError(client.Username+"没有房间");
+                    Debug.LogError(client.Username + "没有房间");
                     return;
                 }
                 pack.Returncode = ReturnCode.Success;

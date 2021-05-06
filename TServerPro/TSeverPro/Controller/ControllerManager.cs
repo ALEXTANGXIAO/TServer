@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 using SocketGameProtocol;
 
-namespace SocketServer
+namespace ServerApp
 {
     class ControllerManager
     {

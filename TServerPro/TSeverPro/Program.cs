@@ -4,10 +4,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using MySql.Data.MySqlClient;
+using ServerApp;
 
-namespace SocketServer
+namespace ServerApp
 {
-    class Program
+    public class Program:Singleton<Program>
     {
         private static int port = 54809;
         static void Main(string[] args)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SocketGameProtocol;
 
-namespace SocketServer
+namespace ServerApp
 {
     class BaseController
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using Google.Protobuf.Collections;
 
-namespace SocketServer
+namespace ServerApp
 {
     public enum RoomState
     {
@@ -39,6 +39,12 @@ namespace SocketServer
             }
         }
 
+        public Room(RoomPack pack, Server server)
+        {
+            roompack = pack;
+            this.server = server;
+        }
+
         public Room(Client client,RoomPack pack,Server server)
         {
             roompack = pack;
@@ -60,8 +66,20 @@ namespace SocketServer
             return packlist;
         }
 
+        public void BroadcastJustTo(Client Myclient, MainPack pack)
+        {
+            foreach (Client client in clientList)
+            {
+                if (client.Equals(Myclient))
+                {
+                    client.Send(pack);
+                    return;
+                }
+            }
+        }
+
         /// <summary>
-        /// 广播消息
+        /// 广播消息除了Myclient
         /// </summary>
         /// <param name="Myclient"></param>
         /// <param name="pack"></param>
@@ -92,11 +110,6 @@ namespace SocketServer
 
         public void Join(Client client)
         {
-            if (clientList.Contains(client))
-            {
-                Debug.LogError("已经在房间了");
-                return;
-            }
             clientList.Add(client);
             if (clientList.Count >= roompack.Maxnum)
             {
@@ -104,13 +117,15 @@ namespace SocketServer
                 roompack.State = (int)RoomState.MaxPlayer;
             }
             client.GetRoom = this;
-            MainPack pack = new MainPack();
-            pack.Actioncode = ActionCode.PlayerList;
-            foreach (var player in GetPlayerInfos())
-            {
-                pack.Playerpack.Add(player);
-            }
-            Broadcast(client,pack);
+            //MainPack pack = new MainPack();
+            //pack.Actioncode = ActionCode.PlayerList;
+            //foreach (var player in GetPlayerInfos())
+            //{
+            //    pack.Playerpack.Add(player);
+            //}
+            //Broadcast(client,pack);
+
+            Starting(client);
         }
 
         public void Exit(Server server, Client client)
@@ -123,15 +138,6 @@ namespace SocketServer
             }
             else
             {
-                if (client == clientList[0])
-                {
-                    //房主离开
-                    client.GetRoom = null;
-                    pack.Actioncode = ActionCode.Exit;
-                    Broadcast(client, pack);
-                    server.RemoveRoom(this);
-                    return;
-                }
                 clientList.Remove(client);
                 roompack.State = (int)RoomState.Waiting;
                 client.GetRoom = null;
@@ -155,6 +161,24 @@ namespace SocketServer
             starttime.Start();
             Debug.Log(roompack + "开始游戏");
             return ReturnCode.Success;
+        }
+
+        private void Starting(Client Myclient)
+        {
+            MainPack pack = new MainPack();
+            pack.Actioncode = ActionCode.Starting;
+
+            foreach (var client in clientList)
+            {
+                PlayerPack player = new PlayerPack();
+                client.GetUserInFo.HP = 100;
+                player.Playername = client.GetUserInFo.Username;
+                player.Hp = client.GetUserInFo.HP;
+                pack.Playerpack.Add(player);
+            }
+            Broadcast(null, pack);
+
+            //BroadcastJustTo(Myclient, pack);
         }
 
         private void Time()
@@ -187,31 +211,19 @@ namespace SocketServer
         public void ExitGame(Client client)
         {
             MainPack pack = new MainPack();
-            if (client == clientList[0])
+            //其他成员退出
+            clientList.Remove(client);
+            client.GetRoom = null;
+            pack.Actioncode = ActionCode.RemoveCharacter;
+            foreach (var VARIABLE in clientList)
             {
-                //房主退出
-                pack.Actioncode = ActionCode.ExitGame;
-                pack.Str = "r";
-                Broadcast(client, pack);
-                server.RemoveRoom(this);
-                client.GetRoom = null;
+                PlayerPack playerPack = new PlayerPack();
+                playerPack.Playername = VARIABLE.GetUserInFo.Username;
+                playerPack.Hp = VARIABLE.GetUserInFo.HP;
+                pack.Playerpack.Add(playerPack);
             }
-            else
-            {
-                //其他成员退出
-                clientList.Remove(client);
-                client.GetRoom = null;
-                pack.Actioncode = ActionCode.UpCharacterList;
-                foreach (var VARIABLE in clientList)
-                {
-                    PlayerPack playerPack = new PlayerPack();
-                    playerPack.Playername = VARIABLE.GetUserInFo.Username;
-                    playerPack.Hp = VARIABLE.GetUserInFo.HP;
-                    pack.Playerpack.Add(playerPack);
-                }
-                pack.Str = client.GetUserInFo.Username;
-                Broadcast(client, pack);
-            }
+            pack.Str = client.GetUserInFo.Username;
+            Broadcast(client, pack);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace SocketServer
+namespace ServerApp
 {
     public class Util
     {

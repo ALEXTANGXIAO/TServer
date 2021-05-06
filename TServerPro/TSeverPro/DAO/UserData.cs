@@ -4,7 +4,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using SocketGameProtocol;
 
-namespace SocketServer.DAO
+namespace ServerApp
 {
     class UserData
     {
