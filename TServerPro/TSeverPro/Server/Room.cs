@@ -130,24 +130,24 @@ namespace ServerApp
 
         public void Exit(Server server, Client client)
         {
-            MainPack pack = new MainPack();
+            ExitGame(client);
 
-            if (roompack.State == (int)RoomState.Started)
-            {
-                ExitGame(client);
-            }
-            else
-            {
-                clientList.Remove(client);
-                roompack.State = (int)RoomState.Waiting;
-                client.GetRoom = null;
-                pack.Actioncode = ActionCode.PlayerList;
-                foreach (PlayerPack player in GetPlayerInfos())
-                {
-                    pack.Playerpack.Add(player);
-                }
-                Broadcast(client, pack);
-            }
+            //if (true)
+            //{
+            //}
+            //else
+            //{
+            //    MainPack pack = new MainPack();
+            //    clientList.Remove(client);
+            //    roompack.State = (int)RoomState.Waiting;
+            //    client.GetRoom = null;
+            //    pack.Actioncode = ActionCode.PlayerList;
+            //    foreach (PlayerPack player in GetPlayerInfos())
+            //    {
+            //        pack.Playerpack.Add(player);
+            //    }
+            //    Broadcast(client, pack);
+            //}
         }
 
         public ReturnCode StartGame(Client client)
