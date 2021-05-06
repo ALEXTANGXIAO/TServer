@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSeverPro", "TSeverPro.csproj", "{E204168E-5D25-4236-9C7A-75F5BB7B4A00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E204168E-5D25-4236-9C7A-75F5BB7B4A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E204168E-5D25-4236-9C7A-75F5BB7B4A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E204168E-5D25-4236-9C7A-75F5BB7B4A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E204168E-5D25-4236-9C7A-75F5BB7B4A00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12BE5297-6295-4914-AE78-920B31FD418C}
+	EndGlobalSection
+EndGlobal
