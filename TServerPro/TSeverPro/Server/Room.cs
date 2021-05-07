@@ -20,7 +20,7 @@ namespace ServerApp
 
         private Server server;
 
-        private List<Client> clientList = new List<Client>();   //房间内所有的客户端
+        private static List<Client> clientList = new List<Client>();   //房间内所有的客户端
 
         public List<Client> ClientList
         {
@@ -106,6 +106,15 @@ namespace ServerApp
                 }
                 c.SendTo(pack);
             }
+
+            //for (int i = 0; i < clientList.Count; i++)
+            //{
+            //    if (clientList[i].Equals(client))
+            //    {
+            //        continue;
+            //    }
+            //    clientList[i].SendTo(pack);
+            //}
         }
 
         public void Join(Client client)

@@ -142,15 +142,6 @@ namespace ServerApp
                     return;
                 }
 
-                //if (Length == 1)
-                //{
-                //    //心跳包 
-                //    message.ReadBuffer(Length);
-                //    CheckReceiveBuffer();
-                //    StartReceive();
-                //    return;
-                //}
-
                 message.ReadBuffer(Length, HandleRequest);
 
                 StartReceive();
