@@ -30,13 +30,13 @@ namespace ServerApp
             if (client.GetUserData.Login(pack, client.GetMysqlConnect))
             {
                 pack.Returncode = ReturnCode.Success;
-                Debug.Log("登录成功！！！！");
+                Debug.Log(client.clientip + pack.LoginPack.Username + "登录成功");
                 client.Username = pack.LoginPack.Username;
                 client.GetUserInFo.Username = pack.LoginPack.Username;
             }
             else
             {
-                Debug.Log("登录失败！！！！");
+                Debug.LogError(client.clientip + "登录失败！！！！");
                 pack.Returncode = ReturnCode.Fail;
             }
             return pack;
