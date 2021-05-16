@@ -169,23 +169,30 @@ namespace ServerApp
 
         private void Close()
         {
-            if (GetRoom != null)
+            try
             {
-                //客户端强制关闭，退出
-                GetRoom.Exit(server,this);
-            }
-            socket.Close();
-            server.RemoveClient(this);
+                if (GetRoom != null)
+                {
+                    //客户端强制关闭，退出
+                    GetRoom.Exit(server, this);
+                }
+                socket.Close();
+                server.RemoveClient(this);
 
-            if(m_HeartBitTimer != null)
+                if (m_HeartBitTimer != null)
+                {
+                    m_HeartBitTimer.Dispose();
+                    m_HeartBitTimer = null;
+                }
+
+                CloseMySql();
+                Debug.LogInfo(clientip + "--------------  心跳断开  --------------");
+                Debug.Log(this.clientip + this.clientAddress + "断开连接");
+            }
+            catch (Exception e)
             {
-                m_HeartBitTimer.Dispose();
-                m_HeartBitTimer = null;
+                Debug.LogError(e);
             }
-
-            CloseMySql();
-            Debug.LogInfo(clientip + "--------------  心跳断开  --------------");
-            Debug.Log(this.clientip + this.clientAddress +  "断开连接");
         }
 
         /// <summary>
@@ -292,8 +299,11 @@ namespace ServerApp
 
         public void CloseMySql()
         {
-            mySqlConn.Close();
-            mySqlConn = null;
+            if (mySqlConn != null)
+            {
+                mySqlConn.Close();
+                mySqlConn = null;
+            }
         }
     }
 }
